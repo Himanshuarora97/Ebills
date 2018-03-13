@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">EBills</string>
     <string name="Rs">\u20B9</string>
+    <string name="RecentBills">RECENT_BILLS_EBILLS</string>
 </resources>
