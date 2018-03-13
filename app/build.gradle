@@ -37,4 +37,6 @@ dependencies {
 
     // Glide Slider
     compile 'com.github.firdausmaulan:GlideSlider:1.0.0'
+
+
 }

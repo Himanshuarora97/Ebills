@@ -1,0 +1,28 @@
+{
+  "Results":[
+    {
+      "product_name" : "DellVostroLaptop",
+      "shop_name" : "Navrang",
+      "Price" : "33000"
+    },
+
+    {
+      "product_name" : "Table Furniture",
+      "shop_name" : "Bansal Ki Dukan",
+      "Price" : "10000"
+    },
+
+    {
+      "product_name" : "2kg Paneer",
+      "shop_name" : "Bansal ki Dairy",
+      "Price" : "100"
+    },
+
+    {
+      "product_name" : "2 packet sheets" ,
+      "shop_name" : "Bansal Stationary Vala",
+      "Price" : "30"
+    }
+
+  ]
+}

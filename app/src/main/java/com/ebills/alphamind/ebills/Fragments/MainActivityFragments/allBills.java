@@ -13,6 +13,10 @@ import android.widget.TextView;
 
 import com.ebills.alphamind.ebills.Adapters.mainActivityAllBillsRecyclerAdapter;
 import com.ebills.alphamind.ebills.R;
+import com.ebills.alphamind.ebills.Server.allBillsServer;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 /**
  * Created by anmol on 13/3/18.
@@ -53,18 +57,30 @@ public class allBills extends Fragment {
         // initialize
         initializeAll(v);
 
+        allBillsServer billServer = new allBillsServer(ctx);
 
-        if (a){
-            tx.setVisibility(View.GONE);
-            rv.setVisibility(View.VISIBLE);
-            RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(ctx);
-            RecyclerView.Adapter adapter=new mainActivityAllBillsRecyclerAdapter();
-            rv.setLayoutManager(layoutManager);
-            rv.setAdapter(adapter);
-        }
-        else{
-            tx.setVisibility(View.VISIBLE);
-            rv.setVisibility(View.GONE);
+        // Getting Results from bills Server
+        try {
+            billServer.getResults(new allBillsServer.BillsCallBack() {
+                @Override
+                public void getBillDetails(JSONArray jsonArray) throws JSONException {
+
+                    if (jsonArray.length()>0){
+                        tx.setVisibility(View.GONE);
+                        rv.setVisibility(View.VISIBLE);
+                        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(ctx);
+                        RecyclerView.Adapter adapter=new mainActivityAllBillsRecyclerAdapter(jsonArray);
+                        rv.setLayoutManager(layoutManager);
+                        rv.setAdapter(adapter);
+                    }
+                    else{
+                        tx.setVisibility(View.VISIBLE);
+                        rv.setVisibility(View.GONE);
+                    }
+                }
+            });
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
         return v;
     }
