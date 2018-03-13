@@ -21,8 +21,6 @@ public class RecentBillStore {
         this.ctx = ctx;
     }
 
-
-
     public void saveBill(String pName , String sName , String priceName) throws JSONException {
 
         JSONObject jsonObject = new JSONObject();

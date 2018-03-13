@@ -13,6 +13,10 @@ import android.widget.TextView;
 import com.ebills.alphamind.ebills.Adapters.mainActivityAllBillsRecyclerAdapter;
 import com.ebills.alphamind.ebills.Adapters.mainActivityRecentRecyclerAdapter;
 import com.ebills.alphamind.ebills.R;
+import com.ebills.alphamind.ebills.Storage.Recent.RecentBillStore;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 
 public class Recent extends Fragment {
@@ -50,12 +54,21 @@ public class Recent extends Fragment {
         // initialize
         initializeAll(v);
 
+        RecentBillStore recentBillStore = new RecentBillStore(ctx);
 
-        if (a){
+        JSONArray jsonArray = null;
+        try {
+            jsonArray = new JSONArray(recentBillStore.getBills());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        if (jsonArray.length()>0){
             tx.setVisibility(View.GONE);
             rv.setVisibility(View.VISIBLE);
             RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(ctx);
-            RecyclerView.Adapter adapter=new mainActivityRecentRecyclerAdapter();
+            RecyclerView.Adapter adapter=new mainActivityRecentRecyclerAdapter(jsonArray);
             rv.setLayoutManager(layoutManager);
             rv.setAdapter(adapter);
         }
