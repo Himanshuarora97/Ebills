@@ -43,7 +43,7 @@ public class RecentBillStore {
 
     public String getBills(){
         SharedPreferences sharedPref = ctx.getSharedPreferences(String.valueOf((R.string.RecentBills)), Context.MODE_PRIVATE);
-        return sharedPref.getString(String.valueOf(R.string.RecentBills), "");
+        return sharedPref.getString(String.valueOf(R.string.RecentBills), "[]");
     }
 
 }

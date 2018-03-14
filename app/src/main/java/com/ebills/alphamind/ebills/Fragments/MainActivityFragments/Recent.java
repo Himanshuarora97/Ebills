@@ -1,5 +1,6 @@
 package com.ebills.alphamind.ebills.Fragments.MainActivityFragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 
+@SuppressLint("ValidFragment")
 public class Recent extends Fragment {
 
     RecyclerView rv;
@@ -30,13 +32,9 @@ public class Recent extends Fragment {
     Context ctx;
 
 
-    // Boolean assumption (Checking from response of server
-    boolean a = true;
-
-
-
-    public Recent() {
-        // Required empty public constructor
+    @SuppressLint("ValidFragment")
+    public Recent(Context ctx) {
+        this.ctx = ctx;
     }
 
     @Override

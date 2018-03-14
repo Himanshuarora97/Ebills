@@ -56,8 +56,6 @@ public class mainActivityRecentRecyclerAdapter extends RecyclerView.Adapter<main
                 e.printStackTrace();
             }
         }
-
-
     }
 
     @Override

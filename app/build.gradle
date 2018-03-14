@@ -38,5 +38,6 @@ dependencies {
     // Glide Slider
     compile 'com.github.firdausmaulan:GlideSlider:1.0.0'
 
-
+    // Material Search
+    compile 'com.miguelcatalan:materialsearchview:1.4.0'
 }

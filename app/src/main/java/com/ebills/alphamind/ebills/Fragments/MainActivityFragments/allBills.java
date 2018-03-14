@@ -18,9 +18,10 @@ import com.ebills.alphamind.ebills.Server.allBillsServer;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-/**
- * Created by anmol on 13/3/18.
- */
+
+//stores , bills
+
+// pn ,pdesc ,  , sn , price , saddress , sdescription
 
 @SuppressLint("ValidFragment")
 public class allBills extends Fragment {
@@ -33,9 +34,6 @@ public class allBills extends Fragment {
 
     Context ctx;
 
-
-    // Boolean assumption (Checking from response of server
-    boolean a = true;
 
     @SuppressLint("ValidFragment")
     public allBills(Context ctx) {
