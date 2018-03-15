@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "732219811301",
+    "firebase_url": "https://ebills-c0588.firebaseio.com",
+    "project_id": "ebills-c0588",
+    "storage_bucket": "ebills-c0588.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:732219811301:android:efe362441c4c13e9",
+        "android_client_info": {
+          "package_name": "com.ebills.alphamind.ebills"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "732219811301-6ti2guhgf82kels87jfic22o26mu4lae.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4VhAJlvxnuGj0NVYPwEKf_gdViX35bwQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
