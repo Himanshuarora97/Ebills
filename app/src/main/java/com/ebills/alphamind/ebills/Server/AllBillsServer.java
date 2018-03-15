@@ -11,16 +11,21 @@ import java.io.InputStream;
 
 public class AllBillsServer {
 
-    Context ctx;
+    Context context;
+
+    // interface for getting array
+    public interface BillsCallBack{
+        void getBillDetails(JSONArray jsonArray) throws JSONException;
+    }
 
     public AllBillsServer(Context ctx){
-        this.ctx = ctx;
+        this.context = ctx;
     }
 
     public String loadJSONFromAsset() {
         String json = null;
         try {
-            InputStream is = ctx.getAssets().open("allbills.json");
+            InputStream is = context.getAssets().open("allbills.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
@@ -35,15 +40,11 @@ public class AllBillsServer {
 
     // Get Results
     public void getResults(BillsCallBack billsCallBack) throws JSONException {
-
         JSONObject obj = new JSONObject(loadJSONFromAsset());
         JSONArray m_jArry = obj.getJSONArray("Results");
         billsCallBack.getBillDetails(m_jArry);
     }
 
-    public interface BillsCallBack{
-        void getBillDetails(JSONArray jsonArray) throws JSONException;
-    }
 }
 
 

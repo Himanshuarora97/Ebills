@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,7 @@ public class AllBills extends Fragment {
                     if (jsonArray.length() > 0) {
                         textView.setVisibility(View.GONE);
                         recyclerView.setVisibility(View.VISIBLE);
+                        Log.e("onBindViewHolder: ", String.valueOf(jsonArray));
                         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
                         RecyclerView.Adapter adapter = new MainActivityAllBillsRecyclerAdapter(jsonArray);
                         recyclerView.setLayoutManager(layoutManager);
