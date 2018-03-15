@@ -11,8 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ebills.alphamind.ebills.Adapters.mainActivityAllBillsRecyclerAdapter;
-import com.ebills.alphamind.ebills.Adapters.mainActivityRecentRecyclerAdapter;
+import com.ebills.alphamind.ebills.Adapters.MainActivityRecentRecyclerAdapter;
 import com.ebills.alphamind.ebills.R;
 import com.ebills.alphamind.ebills.Storage.Recent.RecentBillStore;
 
@@ -23,18 +22,18 @@ import org.json.JSONException;
 @SuppressLint("ValidFragment")
 public class Recent extends Fragment {
 
-    RecyclerView rv;
+    RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter adapter;
 
-    TextView tx;
+    TextView textView;
 
-    Context ctx;
+    Context context;
 
 
     @SuppressLint("ValidFragment")
     public Recent(Context ctx) {
-        this.ctx = ctx;
+        this.context = ctx;
     }
 
     @Override
@@ -52,7 +51,7 @@ public class Recent extends Fragment {
         // initialize
         initializeAll(v);
 
-        RecentBillStore recentBillStore = new RecentBillStore(ctx);
+        RecentBillStore recentBillStore = new RecentBillStore(context);
 
         JSONArray jsonArray = null;
         try {
@@ -62,24 +61,23 @@ public class Recent extends Fragment {
         }
 
 
-        if (jsonArray.length()>0){
-            tx.setVisibility(View.GONE);
-            rv.setVisibility(View.VISIBLE);
-            RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(ctx);
-            RecyclerView.Adapter adapter=new mainActivityRecentRecyclerAdapter(jsonArray);
-            rv.setLayoutManager(layoutManager);
-            rv.setAdapter(adapter);
-        }
-        else{
-            tx.setVisibility(View.VISIBLE);
-            rv.setVisibility(View.GONE);
+        if (jsonArray.length() > 0) {
+            textView.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
+            RecyclerView.Adapter adapter = new MainActivityRecentRecyclerAdapter(jsonArray);
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setAdapter(adapter);
+        } else {
+            textView.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
         }
         return v;
     }
 
-    public void initializeAll(View v){
-        rv = v.findViewById(R.id.RVofrecentfragment);
-        tx = v.findViewById(R.id.ifnoopenedbillsavailable);
+    public void initializeAll(View v) {
+        recyclerView = v.findViewById(R.id.RVofrecentfragment);
+        textView = v.findViewById(R.id.ifnoopenedbillsavailable);
     }
 }
 
