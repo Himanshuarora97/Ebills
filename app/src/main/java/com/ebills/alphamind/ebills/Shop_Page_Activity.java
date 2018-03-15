@@ -46,8 +46,6 @@ public class Shop_Page_Activity extends AppCompatActivity implements BaseSliderV
         // Intialize
 
         Initialize();
-
-
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("https://www.freelogodesign.org/img/logo-ex-4.png");
         arrayList.add("https://www.freelogodesign.org/img/logo-ex-7.png");
