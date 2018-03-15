@@ -1,16 +1,12 @@
 package com.ebills.alphamind.ebills;
 
 import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,14 +43,14 @@ public class OTPVerificationActivity  extends AppCompatActivity {
 
         setContentView(R.layout.otp_verification_activity);
 
-        //phoneNumber = getIntent().getExtras().getString(getString(R.string.Phone_number));
+        phoneNumber = getIntent().getExtras().getString("phoneNumber");
 
-        OtpEditText = (EditText) findViewById(R.id.OtpEditText);
+
+        OtpEditText = findViewById(R.id.OtpEditText);
         OtpEditText.setText("");
-        PhoneNumberCon = (TextView) findViewById(R.id.OtpPassWordContent);
+        PhoneNumberCon = findViewById(R.id.OtpPassWordContent);
 
-
-//        content = "One Time Password(OTP) has been sent to your mobile ******" + getIntent().getExtras().getString(getString(R.string.Phone_number)).substring(6, 10) + " ,please enter the same here to login";
+        content = "One Time Password(OTP) has been sent to your mobile ******" + getIntent().getExtras().getString("phoneNumber").substring(6, 10) + " ,please enter the same here to login";
 
         PhoneNumberCon.setText(content);
 
@@ -63,37 +59,39 @@ public class OTPVerificationActivity  extends AppCompatActivity {
 
         btn = (Button) findViewById(R.id.Login_OTP);
 
-        broadcastReceiver = new BroadcastReceiver() {
-            @RequiresApi(api = Build.VERSION_CODES.M)
-            @Override
-            public void onReceive(Context context, Intent intent) {
+//        broadcastReceiver = new BroadcastReceiver() {
+//            @RequiresApi(api = Build.VERSION_CODES.M)
+//            @Override
+//            public void onReceive(Context context, Intent intent) {
+//
+//
+//                String senderName = intent.getExtras().getString("phoneNumber");
+//
+//                String message = intent.getExtras().getString("message");
+//
+//                //Printing message
+//                System.out.println(message);
+//
+//                // Don't change otherwise it will not get right otp
+//                String otp = message.replace("Hi, your otp for democrazy is: ", "").substring(0, 6);
+//                Log.e(TAG, "onReceive: " + otp);
+//
+//                //Printing otp
+//                OtpEditText.setText(otp);
+//                System.out.println(otp);
+//
+//                System.out.println("Phone Number : " + phoneNumber);
+//
+//
+//                sendOTP(otp);
+//
+//
+//                sendMessage(otp);
+//
+//            }
+//        };
 
 
-                String senderName = intent.getExtras().getString("phoneNumber");
-
-                String message = intent.getExtras().getString("message");
-
-                //Printing message
-                System.out.println(message);
-
-                // Don't change otherwise it will not get right otp
-                String otp = message.replace("Hi, your otp for democrazy is: ", "").substring(0, 6);
-                Log.e(TAG, "onReceive: " + otp);
-
-                //Printing otp
-                OtpEditText.setText(otp);
-                System.out.println(otp);
-
-                System.out.println("Phone Number : " + phoneNumber);
-
-
-                sendOTP(otp);
-
-
-                sendMessage(otp);
-
-            }
-        };
 
 
         btn.setOnClickListener(new View.OnClickListener() {
@@ -125,8 +123,12 @@ public class OTPVerificationActivity  extends AppCompatActivity {
     }
 
 
-    //sendOTP
+    //sendOTP to server for verification
     public void sendOTP(String otp) {
+
+        if (otp.equals("123456")){
+            Intent i = new Intent(OTPVerificationActivity.this , MainActivity.class);
+        }
 
     }
 

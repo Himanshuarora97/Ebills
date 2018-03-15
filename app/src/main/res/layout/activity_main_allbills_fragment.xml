@@ -16,8 +16,20 @@
         android:id="@+id/ifnoallbillsavailable"
         android:textSize="30sp"
         android:layout_width="wrap_content"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="No Bills Available"/>
+
+    <Button
+        android:id="@+id/LoginMainActivity1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LogIn"
+        android:layout_centerInParent="true"
+        android:paddingLeft="30dp"
+        android:background="@color/material_deep_teal_50"
+        android:textColor="#fff"
+        android:paddingRight="30dp"/>
 
 </RelativeLayout>

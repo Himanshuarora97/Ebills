@@ -2,6 +2,7 @@
     <string name="app_name">EBills</string>
     <string name="Rs">\u20B9</string>
     <string name="RecentBills">RECENT_BILLS_EBILLS</string>
+    <string name="OTP_TOKEN">EBILLS_OTP_TOKEN</string>
     <string name="enter_one_time_password_otp">Enter One Time Password(OTP)</string>
     <string name="OTP_contents_message">One Time Password(OTP) has been sent to your mobile ******6252,please enter the same here to login</string>
 

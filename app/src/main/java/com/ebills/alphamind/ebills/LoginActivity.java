@@ -1,6 +1,7 @@
 package com.ebills.alphamind.ebills;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -38,7 +39,26 @@ public class LoginActivity extends AppCompatActivity{
                     })
                     .show();
             // Add Listener to button
-            submitButton.setOnClickListener(submitListener);
+            submitButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    String text = editText.getText().toString();
+
+                    // Demo
+                    if (text.equals("1234567899")){
+                        Intent i = new Intent(LoginActivity.this , OTPVerificationActivity.class);
+                        i.putExtra("phoneNumber" , "1234567899");
+                        startActivity(i);
+                    }
+
+                    // Server
+                    else{
+
+                    }
+
+                }
+            });
         }
 
         public void initViews() {
@@ -48,13 +68,4 @@ public class LoginActivity extends AppCompatActivity{
             Log.e(TAG, "initViews: " + text);
             editText.setText("");
         }
-
-        View.OnClickListener submitListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final String number = editText.getText().toString();
-                Log.d(TAG, "submitListener : phoneNumber :  " + number);
-            }
-        };
-
 }
