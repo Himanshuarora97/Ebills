@@ -3,7 +3,6 @@ package com.ebills.alphamind.ebills;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.Fade;
 import android.transition.Slide;
 import android.widget.TextView;
 
