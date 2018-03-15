@@ -11,9 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ebills.alphamind.ebills.Adapters.mainActivityAllBillsRecyclerAdapter;
+import com.ebills.alphamind.ebills.Adapters.MainActivityAllBillsRecyclerAdapter;
 import com.ebills.alphamind.ebills.R;
-import com.ebills.alphamind.ebills.Server.allBillsServer;
+import com.ebills.alphamind.ebills.Server.AllBillsServer;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,21 +24,21 @@ import org.json.JSONException;
 // pn ,pdesc ,  , sn , price , saddress , sdescription
 
 @SuppressLint("ValidFragment")
-public class allBills extends Fragment {
+public class AllBills extends Fragment {
 
-    RecyclerView rv;
+    RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter adapter;
 
-    TextView tx;
+    TextView textView;
 
-    Context ctx;
+    Context context;
 
 
     @SuppressLint("ValidFragment")
-    public allBills(Context ctx) {
+    public AllBills(Context context) {
         // Required empty public constructor
-        this.ctx = ctx;
+        this.context = context;
     }
 
     @Override
@@ -55,25 +55,24 @@ public class allBills extends Fragment {
         // initialize
         initializeAll(v);
 
-        allBillsServer billServer = new allBillsServer(ctx);
+        AllBillsServer billServer = new AllBillsServer(context);
 
         // Getting Results from bills Server
         try {
-            billServer.getResults(new allBillsServer.BillsCallBack() {
+            billServer.getResults(new AllBillsServer.BillsCallBack() {
                 @Override
                 public void getBillDetails(JSONArray jsonArray) throws JSONException {
 
-                    if (jsonArray.length()>0){
-                        tx.setVisibility(View.GONE);
-                        rv.setVisibility(View.VISIBLE);
-                        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(ctx);
-                        RecyclerView.Adapter adapter=new mainActivityAllBillsRecyclerAdapter(jsonArray);
-                        rv.setLayoutManager(layoutManager);
-                        rv.setAdapter(adapter);
-                    }
-                    else{
-                        tx.setVisibility(View.VISIBLE);
-                        rv.setVisibility(View.GONE);
+                    if (jsonArray.length() > 0) {
+                        textView.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
+                        RecyclerView.Adapter adapter = new MainActivityAllBillsRecyclerAdapter(jsonArray);
+                        recyclerView.setLayoutManager(layoutManager);
+                        recyclerView.setAdapter(adapter);
+                    } else {
+                        textView.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.GONE);
                     }
                 }
             });
@@ -83,9 +82,9 @@ public class allBills extends Fragment {
         return v;
     }
 
-    public void initializeAll(View v){
-        rv = v.findViewById(R.id.RVofallbillsfragment);
-        tx = v.findViewById(R.id.ifnoallbillsavailable);
+    public void initializeAll(View v) {
+        recyclerView = v.findViewById(R.id.RVofallbillsfragment);
+        textView = v.findViewById(R.id.ifnoallbillsavailable);
     }
 
 }

@@ -13,15 +13,14 @@ import com.ebills.alphamind.ebills.Storage.Recent.RecentBillStore;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 
-public class mainActivityAllBillsRecyclerAdapter extends RecyclerView.Adapter<mainActivityAllBillsRecyclerAdapter.ViewHolder> {
+public class MainActivityAllBillsRecyclerAdapter extends RecyclerView.Adapter<MainActivityAllBillsRecyclerAdapter.ViewHolder> {
 
     JSONArray jsonArray;
     Context ctx;
 
-    public mainActivityAllBillsRecyclerAdapter(JSONArray jsonArray) {
+    public MainActivityAllBillsRecyclerAdapter(JSONArray jsonArray) {
         this.jsonArray = jsonArray;
         this.ctx = ctx;
     }
@@ -60,12 +59,12 @@ public class mainActivityAllBillsRecyclerAdapter extends RecyclerView.Adapter<ma
 
 
     @Override
-    public mainActivityAllBillsRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new mainActivityAllBillsRecyclerAdapter.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_main_fragments_card, parent, false));
+    public MainActivityAllBillsRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new MainActivityAllBillsRecyclerAdapter.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_main_fragments_card, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(final mainActivityAllBillsRecyclerAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final MainActivityAllBillsRecyclerAdapter.ViewHolder holder, int position) {
 
         for (int i = 0; i<jsonArray.length() ; i++){
             try {

@@ -11,8 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ebills.alphamind.ebills.Adapters.mainActivityAllBillsRecyclerAdapter;
-import com.ebills.alphamind.ebills.Adapters.mainActivityRecentRecyclerAdapter;
+import com.ebills.alphamind.ebills.Adapters.MainActivityRecentRecyclerAdapter;
 import com.ebills.alphamind.ebills.R;
 import com.ebills.alphamind.ebills.Storage.Recent.RecentBillStore;
 
@@ -66,7 +65,7 @@ public class Recent extends Fragment {
             tx.setVisibility(View.GONE);
             rv.setVisibility(View.VISIBLE);
             RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(ctx);
-            RecyclerView.Adapter adapter=new mainActivityRecentRecyclerAdapter(jsonArray);
+            RecyclerView.Adapter adapter=new MainActivityRecentRecyclerAdapter(jsonArray);
             rv.setLayoutManager(layoutManager);
             rv.setAdapter(adapter);
         }

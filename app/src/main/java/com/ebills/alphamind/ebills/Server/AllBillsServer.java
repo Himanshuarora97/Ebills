@@ -9,11 +9,11 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class allBillsServer {
+public class AllBillsServer {
 
     Context ctx;
 
-    public allBillsServer(Context ctx){
+    public AllBillsServer(Context ctx){
         this.ctx = ctx;
     }
 

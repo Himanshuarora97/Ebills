@@ -13,11 +13,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 
-public class mainActivityRecentRecyclerAdapter extends RecyclerView.Adapter<mainActivityRecentRecyclerAdapter.ViewHolder> {
+public class MainActivityRecentRecyclerAdapter extends RecyclerView.Adapter<MainActivityRecentRecyclerAdapter.ViewHolder> {
 
     JSONArray jsonArray;
 
-    public mainActivityRecentRecyclerAdapter(JSONArray jsonArray) {
+    public MainActivityRecentRecyclerAdapter(JSONArray jsonArray) {
 
         this.jsonArray = jsonArray;
     }
@@ -40,12 +40,12 @@ public class mainActivityRecentRecyclerAdapter extends RecyclerView.Adapter<main
 
 
     @Override
-    public mainActivityRecentRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new mainActivityRecentRecyclerAdapter.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_main_fragments_card,parent,false));
+    public MainActivityRecentRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new MainActivityRecentRecyclerAdapter.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_main_fragments_card,parent,false));
     }
 
     @Override
-    public void onBindViewHolder(final mainActivityRecentRecyclerAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final MainActivityRecentRecyclerAdapter.ViewHolder holder, int position) {
 
         for (int i = 0; i<jsonArray.length() ; i++){
             try {
