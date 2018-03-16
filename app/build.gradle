@@ -54,6 +54,9 @@ dependencies {
     //Super Toast
     compile 'com.github.johnpersano:supertoasts:2.0'
 
+    // Page transformer
+    compile 'com.eftimoff:android-viewpager-transformers:1.0.1@aar'
+
 }
 apply plugin: 'com.google.gms.google-services'
 
