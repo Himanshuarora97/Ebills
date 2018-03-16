@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 
 
-public class Shop_Page_Activity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener,
+public class ShopPageActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener,
         ViewPagerEx.OnPageChangeListener {
 
     private SliderLayout sliderLayout;
@@ -77,13 +77,13 @@ public class Shop_Page_Activity extends AppCompatActivity implements BaseSliderV
         horizontal.setNestedScrollingEnabled(false);
         l1 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         horizontal.setLayoutManager(l1);
-        horizontal.setAdapter(new ShopPageActivity_HorizontalProductsAdapter(Shop_Page_Activity.this));
+        horizontal.setAdapter(new ShopPageActivity_HorizontalProductsAdapter(ShopPageActivity.this));
 
         // Vertical
         vertical.setNestedScrollingEnabled(false);
         l2 = new LinearLayoutManager(this);
         vertical.setLayoutManager(l2);
-        vertical.setAdapter(new ShopPageActivity_HorizontalProductsAdapter(Shop_Page_Activity.this));
+        vertical.setAdapter(new ShopPageActivity_HorizontalProductsAdapter(ShopPageActivity.this));
 
     }
 
