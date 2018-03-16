@@ -1,6 +1,5 @@
 package com.ebills.alphamind.ebills;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,14 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
-
 public class LoginActivity extends AppCompatActivity{
 
 
         private static final String TAG = LoginActivity.class.getSimpleName();
         EditText editText;
+        EditText password;
         Button submitButton;
+        Button newAccount;
 
         @Override
         protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,34 +25,44 @@ public class LoginActivity extends AppCompatActivity{
 
             // initViews
             initViews();
-
-            new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.WARNING_TYPE)
-                    .setTitleText("1234567899")
-                    .setContentText("use above number for demo purpose ")
-                    .setConfirmText("Ok")
-                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                        @Override
-                        public void onClick(SweetAlertDialog sDialog) {
-                            sDialog.dismissWithAnimation();
-                        }
-                    })
-                    .show();
+//
+//            new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.WARNING_TYPE)
+//                    .setTitleText("1234567899")
+//                    .setContentText("use above number for demo purpose ")
+//                    .setConfirmText("Ok")
+//                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+//                        @Override
+//                        public void onClick(SweetAlertDialog sDialog) {
+//                            sDialog.dismissWithAnimation();
+//                        }
+//                    })
+//                    .show();
             // Add Listener to button
             submitButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    String text = editText.getText().toString();
+                    String pn = editText.getText().toString();
+                    String pass = password.getText().toString();
 
-                    // Demo
-                    if (text.equals("1234567899")){
-                        Intent i = new Intent(LoginActivity.this , OTPVerificationActivity.class);
-                        i.putExtra("phoneNumber" , "1234567899");
-                        startActivity(i);
+                    if (pn.equals("") || pass.equals("")){
+                        // Empty Warning
                     }
 
                     // Server
                     else{
+
+                        //Send it to the server
+                        // Response ok
+
+                        boolean ok = false;
+
+                        if (ok){
+                            // Store Token into the SharedPref File
+
+                            Intent i = new Intent(LoginActivity.this , MainActivity.class);
+                            startActivity(i);
+                        }
 
                     }
 
@@ -64,6 +73,8 @@ public class LoginActivity extends AppCompatActivity{
         public void initViews() {
             editText = (EditText) findViewById(R.id.PhoneNumber);
             submitButton = (Button) findViewById(R.id.SubmitPhoneNumber);
+            newAccount = findViewById(R.id.NewAccount);
+            password = findViewById(R.id.Password_Login);
             String text = editText.getText().toString();
             Log.e(TAG, "initViews: " + text);
             editText.setText("");

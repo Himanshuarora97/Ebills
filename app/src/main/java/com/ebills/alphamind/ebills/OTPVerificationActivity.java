@@ -16,9 +16,6 @@ import com.github.johnpersano.supertoasts.library.Style;
 import com.github.johnpersano.supertoasts.library.SuperActivityToast;
 import com.github.johnpersano.supertoasts.library.utils.PaletteUtils;
 
-/**
- * Created by anmol on 15/3/18.
- */
 
 public class OTPVerificationActivity  extends AppCompatActivity {
 
@@ -126,9 +123,7 @@ public class OTPVerificationActivity  extends AppCompatActivity {
     //sendOTP to server for verification
     public void sendOTP(String otp) {
 
-        if (otp.equals("123456")){
-            Intent i = new Intent(OTPVerificationActivity.this , MainActivity.class);
-        }
+
 
     }
 
