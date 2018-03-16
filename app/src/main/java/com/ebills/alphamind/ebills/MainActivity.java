@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
+    private static final String TAG = MainActivity.class.getSimpleName();
     private static final int MY_PERMISSIONS_REQUEST = 1;
 
     String[] PERMISSIONS = {Manifest.permission.READ_SMS,
@@ -48,18 +50,19 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (hasPermissions(this, PERMISSIONS)) {
-
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-            viewPager = (ViewPager) findViewById(R.id.viewpager);
-            setupViewPager(viewPager);
-
-            tabLayout = (TabLayout) findViewById(R.id.tabs);
-            tabLayout.setupWithViewPager(viewPager);
-        }
-        else
+            showLayouts();
+        } else
             checkPermission();
 
+    }
+
+    private void showLayouts() {
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -142,8 +145,7 @@ public class MainActivity extends AppCompatActivity {
                 // No explanation needed, we can request the permission.
 
                 ActivityCompat.requestPermissions(MainActivity.this,
-                        new String[]{Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        MY_PERMISSIONS_REQUEST);
+                        PERMISSIONS, MY_PERMISSIONS_REQUEST);
 
                 // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
                 // app-defined int constant. The callback method gets the
@@ -166,7 +168,10 @@ public class MainActivity extends AppCompatActivity {
                     boolean storage = grantResults[2] == PackageManager.PERMISSION_GRANTED;
 
                     // permission is DENIED !!
-                    if (!read_sms && !recieve_sms && !storage) {
+                    if (read_sms && recieve_sms && storage) {
+                        showLayouts();
+                        Log.e(TAG, "onRequestPermissionsResult: ");
+                    } else {
                         Snackbar.make(findViewById(android.R.id.content),
                                 "Please Grant Permissions to read OTP from messages",
                                 Snackbar.LENGTH_INDEFINITE).setAction("ENABLE",
