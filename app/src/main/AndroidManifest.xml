@@ -34,6 +34,19 @@
         </activity>
         <activity android:name=".SearchingActivity"
             android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".Shop_Page_Activity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".OTPVerificationActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".NewAccountActivity"
+            android:screenOrientation="portrait"></activity>
+
         <service android:name=".Notifications.FirebaseTokenService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
@@ -55,5 +68,4 @@
         </receiver>
 
     </application>
-
 </manifest>
