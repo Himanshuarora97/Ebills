@@ -58,6 +58,7 @@ public class Recent extends Fragment {
         initializeAll(v);
 
 
+        // OTP
         Otptoken otptoken = new Otptoken(context);
 
         if (otptoken.getOTP().equals(" ")){

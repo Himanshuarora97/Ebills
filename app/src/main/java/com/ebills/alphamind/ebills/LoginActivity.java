@@ -9,6 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.ebills.alphamind.ebills.Storage.OTPToken.Otptoken;
+
+import org.json.JSONException;
+
 public class LoginActivity extends AppCompatActivity{
 
 
@@ -48,6 +52,20 @@ public class LoginActivity extends AppCompatActivity{
                     if (pn.equals("") || pass.equals("")){
                         // Empty Warning
                     }
+
+                    // Demo Purposes
+                    else if (pn.equals("1234567899") && pass.equals("1234")){
+
+                        Otptoken otptoken = new Otptoken(LoginActivity.this);
+                        try {
+                            otptoken.saveOTP("1234");
+                            Intent i = new Intent(LoginActivity.this , MainActivity.class);
+                            startActivity(i);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
 
                     // Server
                     else{
