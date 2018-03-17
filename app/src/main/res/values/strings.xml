@@ -6,4 +6,25 @@
     <string name="enter_one_time_password_otp">Enter One Time Password(OTP)</string>
     <string name="OTP_contents_message">One Time Password(OTP) has been sent to your mobile ******6252,please enter the same here to login</string>
     <string name="Cache_Storage_EBILLS">Cache_Storage</string>
+
+    <!-- App Slider configuration-->
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">E-Bills</string>
+    <string name="slide_1_desc">The easiest way to store and sync your bills !!</string>
+
+    <string name="slide_2_title">Great Discounts</string>
+    <string name="slide_2_desc">Best discounts on every single service we offer!</string>
+
+    <string name="slide_3_title">Search Bills</string>
+    <string name="slide_3_desc">All your bills at your fingertips</string>
+
+    <string name="slide_4_title">Share Bills</string>
+    <string name="slide_4_desc">The easiest and convenient method to Share bills !!</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
 </resources>

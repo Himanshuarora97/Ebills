@@ -57,6 +57,9 @@ dependencies {
     // Added Gson
     compile 'com.google.code.gson:gson:2.8.1'
 
+    // Page transformer
+    compile 'com.eftimoff:android-viewpager-transformers:1.0.1@aar'
+
 }
 apply plugin: 'com.google.gms.google-services'
 
