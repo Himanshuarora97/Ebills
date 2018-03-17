@@ -54,6 +54,9 @@ dependencies {
     //Super Toast
     compile 'com.github.johnpersano:supertoasts:2.0'
 
+    // Added Gson
+    compile 'com.google.code.gson:gson:2.8.1'
+
 }
 apply plugin: 'com.google.gms.google-services'
 
