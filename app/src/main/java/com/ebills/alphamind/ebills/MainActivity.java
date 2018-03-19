@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
@@ -26,12 +27,14 @@ import android.widget.Toast;
 import com.ebills.alphamind.ebills.Adapters.ViewPagerAdapter;
 import com.ebills.alphamind.ebills.Fragments.MainActivityFragments.Recent;
 import com.ebills.alphamind.ebills.Fragments.MainActivityFragments.AllBills;
+import com.ebills.alphamind.ebills.Storage.OTPToken.Otptoken;
 
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private FloatingActionButton floatingActionButton;
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int MY_PERMISSIONS_REQUEST = 1;
@@ -52,9 +55,41 @@ public class MainActivity extends AppCompatActivity {
         if (hasPermissions(this, PERMISSIONS)) {
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             showLayouts();
+
+            // Check Login
+            checkLogin();
+
+            // FLoating Action Button Click Listener
+            clickFab();
+
         } else
             checkPermission();
 
+    }
+
+    //Check Login
+    private void checkLogin(){
+
+        Otptoken otptoken = new Otptoken(MainActivity.this);
+        String otp = otptoken.getOTP();
+        if (otp.equals(" ")){
+            floatingActionButton.setVisibility(View.VISIBLE);
+        }
+        else{
+            floatingActionButton.setVisibility(View.GONE);
+        }
+    }
+
+    //clickFab
+    private void clickFab(){
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // LoginActivityClass
+                Intent i = new Intent(MainActivity.this , LoginActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void showLayouts() {
@@ -63,6 +98,10 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        //Fab login
+        floatingActionButton = findViewById(R.id.fab);
+
     }
 
     private void setupViewPager(ViewPager viewPager) {

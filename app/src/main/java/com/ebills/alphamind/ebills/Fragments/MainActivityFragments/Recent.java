@@ -34,8 +34,8 @@ public class Recent extends Fragment {
 
     Context context;
 
-    Button button;
-
+    //Locked
+    TextView tx;
 
     @SuppressLint("ValidFragment")
     public Recent(Context ctx) {
@@ -63,24 +63,14 @@ public class Recent extends Fragment {
 
         if (otptoken.getOTP().equals(" ")){
 
-            button.setVisibility(View.VISIBLE);
+            tx.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
             textView.setVisibility(View.GONE);
-
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    Intent i = new Intent(context , LoginActivity.class);
-                    startActivity(i);
-                }
-            });
-
         }
 
         else{
 
-            button.setVisibility(View.GONE);
+            tx.setVisibility(View.GONE);
             RecentBillStore recentBillStore = new RecentBillStore(context);
 
             JSONArray jsonArray = null;
@@ -107,7 +97,7 @@ public class Recent extends Fragment {
     public void initializeAll(View v) {
         recyclerView = v.findViewById(R.id.RVofrecentfragment);
         textView = v.findViewById(R.id.ifnoopenedbillsavailable);
-        button = v.findViewById(R.id.LoginMainActivity2);
+        tx = v.findViewById(R.id.recentTextLocked);
     }
 }
 

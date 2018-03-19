@@ -39,7 +39,8 @@ public class AllBills extends Fragment {
 
     Context context;
 
-    Button button;
+    // Locked TextView
+    TextView tx;
 
     @SuppressLint("ValidFragment")
     public AllBills(Context context) {
@@ -64,23 +65,13 @@ public class AllBills extends Fragment {
         Otptoken otptoken = new Otptoken(context);
         if (otptoken.getOTP().equals(" ")){
 
-            button.setVisibility(View.VISIBLE);
+            tx.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
             textView.setVisibility(View.GONE);
-
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    Intent i = new Intent(context , LoginActivity.class);
-                    startActivity(i);
-                }
-            });
-
         }
 
         else{
-            button.setVisibility(View.GONE);
+            tx.setVisibility(View.GONE);
             AllBillsServer billServer = new AllBillsServer(context);
             // Getting Results from bills Server
             try {
@@ -105,7 +96,6 @@ public class AllBills extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }
         return v;
     }
@@ -113,7 +103,7 @@ public class AllBills extends Fragment {
     public void initializeAll(View v) {
         recyclerView = v.findViewById(R.id.RVofallbillsfragment);
         textView = v.findViewById(R.id.ifnoallbillsavailable);
-        button = v.findViewById(R.id.LoginMainActivity1);
+        tx = v.findViewById(R.id.AllBillsLocked);
     }
 
 }
