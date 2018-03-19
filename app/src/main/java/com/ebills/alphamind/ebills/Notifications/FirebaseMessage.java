@@ -41,7 +41,7 @@ public class FirebaseMessage extends FirebaseMessagingService{
             pdf = remoteMessage.getData().get("pdf");
             html = remoteMessage.getData().get("html");
             FBNotification fbNotification = new FBNotification(getApplicationContext());
-            fbNotification.saveNotification(jsonObject);
+            fbNotification.saveNotification(html , pdf);
             GetData getData = new GetData();
             getData.saveJson(jsonObject);
 
@@ -54,14 +54,6 @@ public class FirebaseMessage extends FirebaseMessagingService{
         notificationBuilder.setContentIntent(pendingIntent);
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, notificationBuilder.build());
-    }
-
-    public void Det(final getData getData){
-
-    }
-
-    public interface getData{
-        void details(JSONObject jsonObject);
     }
 
 }

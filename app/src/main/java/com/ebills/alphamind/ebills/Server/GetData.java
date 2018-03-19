@@ -2,6 +2,7 @@ package com.ebills.alphamind.ebills.Server;
 
 import android.content.Context;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class GetData {
@@ -18,7 +19,7 @@ public class GetData {
     }
 
     public interface getDetails{
-        void getD(JSONObject jsonObject);
+        void getD(JSONObject jsonObject) throws JSONException;
     }
 
 }

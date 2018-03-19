@@ -7,6 +7,8 @@
     <string name="OTP_contents_message">One Time Password(OTP) has been sent to your mobile ******6252,please enter the same here to login</string>
     <string name="Cache_Storage_EBILLS">Cache_Storage</string>
     <string name="FB_NOTIFICATION">FB_Notification</string>
+    <string name="AllBills_Storage">AllBills_Storage</string>
+
 
     <!-- App Slider configuration-->
     <string name="title_activity_welcome">Home Screen</string>
