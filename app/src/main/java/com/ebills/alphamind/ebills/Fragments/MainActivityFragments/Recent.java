@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import org.json.JSONException;
 @SuppressLint("ValidFragment")
 public class Recent extends Fragment {
 
+    private static final String TAG = Recent.class.getSimpleName();
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter adapter;
@@ -36,6 +38,9 @@ public class Recent extends Fragment {
 
     //Locked
     TextView tx;
+    View v;
+    private boolean isAlreadyShow = false;
+    private Otptoken otptoken;
 
     @SuppressLint("ValidFragment")
     public Recent(Context ctx) {
@@ -52,23 +57,42 @@ public class Recent extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.activity_main_recent_fragment, container, false);
+        v = inflater.inflate(R.layout.activity_main_recent_fragment, container, false);
 
         // initialize
-        initializeAll(v);
+        initializeAll();
 
 
         // OTP
-        Otptoken otptoken = new Otptoken(context);
+        otptoken = new Otptoken(context);
+        checkCondition();
+        return v;
+    }
 
-        if (otptoken.getOTP().equals(" ")){
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        Log.e(TAG, "isVisiableToUser: " + isVisibleToUser + "isAlreadyShow" + isAlreadyShow);
+        if (isVisibleToUser) {
+            if (!isAlreadyShow) {
+                isAlreadyShow = true;
+                Log.e(TAG, "setUserVisibleHint: ");
+            } else {
+                Log.e(TAG, "IsAlreadyShow: ");
+                checkCondition();
+            }
+        }
+    }
+
+    public void checkCondition() {
+        initializeAll();
+        otptoken = new Otptoken(context);
+        if (otptoken.getOTP().equals(" ")) {
 
             tx.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
             textView.setVisibility(View.GONE);
-        }
-
-        else{
+        } else {
 
             tx.setVisibility(View.GONE);
             RecentBillStore recentBillStore = new RecentBillStore(context);
@@ -91,10 +115,9 @@ public class Recent extends Fragment {
                 recyclerView.setVisibility(View.GONE);
             }
         }
-        return v;
     }
 
-    public void initializeAll(View v) {
+    public void initializeAll() {
         recyclerView = v.findViewById(R.id.RVofrecentfragment);
         textView = v.findViewById(R.id.ifnoopenedbillsavailable);
         tx = v.findViewById(R.id.recentTextLocked);
