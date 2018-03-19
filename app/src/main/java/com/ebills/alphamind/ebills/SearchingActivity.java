@@ -1,113 +1,81 @@
 package com.ebills.alphamind.ebills;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.transition.Slide;
-import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
 
-import com.ebills.alphamind.ebills.Storage.AllBills.AllBillsStorage;
+import com.ebills.alphamind.ebills.Fragments.MainActivityFragments.Products;
+import com.ebills.alphamind.ebills.Fragments.MainActivityFragments.Store;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by anmol on 14/3/18.
- */
 
 public class SearchingActivity extends AppCompatActivity {
 
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
-    RecyclerView rv;
-    RecyclerView.LayoutManager layoutManager;
-    RecyclerView.Adapter adapter;
-
+    private String query;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.search_main_activity);
 
-        // Intializing
-        Intialize();
+        query = getIntent().getExtras().getString("query");
 
-        // Query
-        String query = getIntent().getExtras().getString("query");
+        toolbar = (Toolbar) findViewById(R.id.toolbar_one);
+        setSupportActionBar(toolbar);
 
-        try {
-            doMySearch(query);
-        } catch (JSONException e) {
-            e.printStackTrace();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        viewPager = (ViewPager) findViewById(R.id.viewpager_one);
+        setupViewPager(viewPager);
+
+        tabLayout = (TabLayout) findViewById(R.id.tabs_one);
+        tabLayout.setupWithViewPager(viewPager);
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new Store(SearchingActivity.this , query), "Stores");
+        adapter.addFragment(new Products(SearchingActivity.this , query), "Products");
+        viewPager.setAdapter(adapter);
+    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
         }
 
-        setupWindowAnimations();
-
-    }
-
-//    //Intializing
-//    private void Intialize(){
-//        searchText = findViewById(R.id.SearchMainText);
-//    }
-
-
-    public void Intialize(){
-        rv = findViewById(R.id.SearchRecyclerView);
-        layoutManager = new LinearLayoutManager(SearchingActivity.this);
-
-    }
-
-    // Query String
-    // Search Here
-    public void doMySearch(String query) throws JSONException {
-
-//        searchText.setText(query);
-
-        AllBillsStorage allBillsStorage = new AllBillsStorage(SearchingActivity.this);
-        JSONArray jsonArray = new JSONArray(allBillsStorage.getBillsSto());
-
-        ArrayList<JSONObject> arr = new ArrayList<JSONObject>();
-
-        for (int i = 0 ; i<jsonArray.length() ;i++){
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-            if (jsonObject.getJSONObject("seller").getString("name").equals(query)){
-                arr.add(jsonObject);
-            }
-            if (String.valueOf(Integer.parseInt(jsonObject.getJSONObject("invoice").getString("amount")) * (-1)).equals(query))){
-                arr.add(jsonObject);
-            }
-            if (jsonObject.getJSONObject("invoice").getString("date").contains(query)){
-                arr.add(jsonObject);
-            }
-            JSONArray jsonArray1 = jsonObject.getJSONObject("invoice").getJSONArray("products");
-
-            for (int i = 0 ; i<jsonArray1.length() ; i++){
-                if (jsonArray1.getJSONObject(i).getString("STOCKITEMNAME").equals(query)){
-                    arr.add(jsonObject);
-                }
-            }
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
         }
 
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
 
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
 
-
-
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
-
-
-    //setting up animation
-    private void setupWindowAnimations() {
-        Slide fade = new Slide();
-        fade.setDuration(300);
-        getWindow().setEnterTransition(fade);
-    }
-
 }
