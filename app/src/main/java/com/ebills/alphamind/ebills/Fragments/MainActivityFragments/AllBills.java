@@ -138,6 +138,7 @@ public class AllBills extends Fragment implements GetData.getDetails{
 
     @Override
     public void getD(JSONObject jsonObject) throws JSONException {
+        Log.e("Okay" , "Yes it is doing............................");
         AllBillsStorage allBillsStorage = new AllBillsStorage(context);
         allBillsStorage.saveJSONObject(jsonObject);
     }

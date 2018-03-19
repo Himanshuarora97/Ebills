@@ -1,7 +1,5 @@
 package com.ebills.alphamind.ebills.Server;
 
-import android.content.Context;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,7 +12,7 @@ public class GetData {
         this.jsonObject = jsonObject;
     }
 
-    public void getDeta(final getDetails getDetails){
+    public void getDeta(final getDetails getDetails) throws JSONException {
         getDetails.getD(jsonObject);
     }
 
