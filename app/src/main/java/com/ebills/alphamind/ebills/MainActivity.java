@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         SharedPreferences preferences = getSharedPreferences(FirebaseTokenService.PREFS, Context.MODE_PRIVATE);
-        String token = preferences.getString(FirebaseTokenService.TOKEN,"null");
-        Log.e(TAG, "Token: " +token);
+        String token = preferences.getString(FirebaseTokenService.TOKEN, "null");
+        Log.e(TAG, "Token: " + token);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);

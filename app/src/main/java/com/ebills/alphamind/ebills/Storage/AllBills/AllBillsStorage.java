@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.ebills.alphamind.ebills.Fragments.MainActivityFragments.AllBills;
 import com.ebills.alphamind.ebills.R;
 
 import org.json.JSONArray;
@@ -19,6 +20,9 @@ public class AllBillsStorage {
 
     Context ctx;
 
+    public AllBillsStorage(){
+
+    }
     public AllBillsStorage(Context ctx){
         this.ctx = ctx;
     }
