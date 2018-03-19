@@ -2,7 +2,6 @@ package com.ebills.alphamind.ebills.Fragments.MainActivityFragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,14 +10,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.ebills.alphamind.ebills.Adapters.MainActivityAllBillsRecyclerAdapter;
 import com.ebills.alphamind.ebills.Adapters.MainActivityShopNameFrontAdapter;
-import com.ebills.alphamind.ebills.LoginActivity;
 import com.ebills.alphamind.ebills.R;
-import com.ebills.alphamind.ebills.Server.AllBillsServer;
 import com.ebills.alphamind.ebills.Server.GetData;
 import com.ebills.alphamind.ebills.Storage.AllBills.AllBillsStorage;
 import com.ebills.alphamind.ebills.Storage.OTPToken.Otptoken;
@@ -98,7 +93,7 @@ public class AllBills extends Fragment implements GetData.getDetails{
 //                            recyclerView.setVisibility(View.VISIBLE);
 //                            Log.e("onBindViewHolder: ", String.valueOf(jsonArray));
 //                            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
-//                            RecyclerView.Adapter adapter = new MainActivityAllBillsRecyclerAdapter(context , jsonArray);
+//                            RecyclerView.Adapter adapter = new ProductsAdapter(context , jsonArray);
 //                            recyclerView.setLayoutManager(layoutManager);
 //                            recyclerView.setAdapter(adapter);
 //                        } else {

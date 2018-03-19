@@ -1,6 +1,7 @@
 package com.ebills.alphamind.ebills.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ebills.alphamind.ebills.ProductMainActivity;
 import com.ebills.alphamind.ebills.R;
 import com.ebills.alphamind.ebills.Storage.CacheStorage.CacheStorage;
 import com.ebills.alphamind.ebills.Storage.Recent.RecentBillStore;
@@ -106,8 +108,13 @@ public class MainActivityShopNameFrontAdapter extends RecyclerView.Adapter<MainA
                     try {
                         SaveInRecent(jsonArray.getJSONObject(pos));
 
-                        //Save
-                        SaveBill();
+//                        //Save
+//                        SaveBill();
+
+                        //ProductAdapter
+                        Intent i = new Intent(ctx , ProductMainActivity.class);
+                        i.putExtra("products" , String.valueOf(jsonArray.getJSONObject(pos).getJSONObject("invoice").getJSONArray("products")));
+                        ctx.startActivity(i);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -122,16 +129,16 @@ public class MainActivityShopNameFrontAdapter extends RecyclerView.Adapter<MainA
         RecentBillStore recentBillStore = new RecentBillStore(ctx);
         recentBillStore.saveBill(jsonObject);
     }
-
-    //Save Bill
-    private void SaveBill() throws JSONException {
-        // HTML saved
-
-        CacheStorage cacheStorage = new CacheStorage(ctx);
-
-        // Saving file
-        String str = null;
-        cacheStorage.saveFile(str);
-
-    }
+//
+//    //Save Bill
+//    private void SaveBill() throws JSONException {
+//        // HTML saved
+//
+//        CacheStorage cacheStorage = new CacheStorage(ctx);
+//
+//        // Saving file
+//        String str = null;
+//        cacheStorage.saveFile(str);
+//
+//    }
 }
