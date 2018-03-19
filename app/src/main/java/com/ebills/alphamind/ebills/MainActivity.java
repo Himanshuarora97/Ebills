@@ -2,6 +2,7 @@ package com.ebills.alphamind.ebills;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -29,6 +30,7 @@ import android.widget.Toast;
 import com.ebills.alphamind.ebills.Adapters.ViewPagerAdapter;
 import com.ebills.alphamind.ebills.Fragments.MainActivityFragments.Recent;
 import com.ebills.alphamind.ebills.Fragments.MainActivityFragments.AllBills;
+import com.ebills.alphamind.ebills.Notifications.FirebaseTokenService;
 import com.ebills.alphamind.ebills.Storage.OTPToken.Otptoken;
 
 public class MainActivity extends AppCompatActivity {
@@ -51,8 +53,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-
-
+        SharedPreferences preferences = getSharedPreferences(FirebaseTokenService.PREFS, Context.MODE_PRIVATE);
+        String token = preferences.getString(FirebaseTokenService.TOKEN,"null");
+        Log.e(TAG, "Token: " +token);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);

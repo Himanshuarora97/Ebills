@@ -14,7 +14,7 @@ public class GetData {
         this.jsonObject = jsonObject;
     }
 
-    public void getDeta(final getDetails getDetails){
+    public void getDeta(final getDetails getDetails) throws JSONException {
         getDetails.getD(jsonObject);
     }
 
