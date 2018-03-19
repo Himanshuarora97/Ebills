@@ -2,6 +2,7 @@ package com.ebills.alphamind.ebills.Storage.AllBills;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.ebills.alphamind.ebills.R;
 
@@ -28,6 +29,7 @@ public class AllBillsStorage {
         jsonArray.put(jsonObject);
         String l = jsonArray.toString();
 
+        Log.e("allbillstorage" , l);
         SharedPreferences sharedPref = ctx.getSharedPreferences(String.valueOf(R.string.AllBills_Storage), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(String.valueOf(R.string.AllBills_Storage), l);
