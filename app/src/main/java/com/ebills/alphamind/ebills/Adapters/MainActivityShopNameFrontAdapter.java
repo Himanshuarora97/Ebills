@@ -2,6 +2,7 @@ package com.ebills.alphamind.ebills.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
@@ -53,15 +54,15 @@ public class MainActivityShopNameFrontAdapter extends RecyclerView.Adapter<MainA
 //            e.printStackTrace();
 //        }
 
-        int color = Color.parseColor("#000000");
+        int color = Color.parseColor(getRandomMaterialColor("400"));
 
         try {
             String shopName = jsonArray.getJSONObject(position).getJSONObject("seller").getString("name");
             String price1 = jsonArray.getJSONObject(position).getJSONObject("invoice").getString("amount");
-            String price = String.valueOf(Float.parseFloat(price1)*-1);
+            String price = String.valueOf(Float.parseFloat(price1) * -1);
             String date = jsonArray.getJSONObject(position).getJSONObject("invoice").getString("date");
-            String year = date.substring(0,4);
-            String month = date.substring(4,6);
+            String year = date.substring(0, 4);
+            String month = date.substring(4, 6);
             String dat = date.substring(6);
             date = dat + "/" + month + "/" + year;
             TextDrawable myDrawable = TextDrawable.builder().beginConfig()
@@ -69,7 +70,7 @@ public class MainActivityShopNameFrontAdapter extends RecyclerView.Adapter<MainA
                     .useFont(Typeface.DEFAULT)
                     .toUpperCase()
                     .endConfig()
-            .buildRound(shopName.substring(0, 1), color);
+                    .buildRound(shopName.substring(0, 1), color);
             holder.imageView.setImageDrawable(myDrawable);
             holder.sName.setText(shopName);
             holder.date.setText(date);
@@ -112,8 +113,8 @@ public class MainActivityShopNameFrontAdapter extends RecyclerView.Adapter<MainA
 //                        SaveBill();
 
                         //ProductAdapter
-                        Intent i = new Intent(ctx , ProductMainActivity.class);
-                        i.putExtra("products" , String.valueOf(jsonArray.getJSONObject(pos).getJSONObject("invoice").getJSONArray("products")));
+                        Intent i = new Intent(ctx, ProductMainActivity.class);
+                        i.putExtra("products", String.valueOf(jsonArray.getJSONObject(pos).getJSONObject("invoice").getJSONArray("products")));
                         ctx.startActivity(i);
 
                     } catch (JSONException e) {
@@ -128,6 +129,19 @@ public class MainActivityShopNameFrontAdapter extends RecyclerView.Adapter<MainA
     public void SaveInRecent(JSONObject jsonObject) throws JSONException {
         RecentBillStore recentBillStore = new RecentBillStore(ctx);
         recentBillStore.saveBill(jsonObject);
+    }
+
+    public String getRandomMaterialColor(String typeColor) {
+        int returnColor = Color.GRAY;
+        int arrayId = ctx.getResources().getIdentifier("colors_" + typeColor, "array", ctx.getPackageName());
+
+        if (arrayId != 0) {
+            TypedArray colors = ctx.getResources().obtainTypedArray(arrayId);
+            int index = (int) (Math.random() * colors.length());
+            returnColor = colors.getColor(index, Color.GRAY);
+            colors.recycle();
+        }
+        return String.format("#%06X", (0xFFFFFF & returnColor));
     }
 //
 //    //Save Bill

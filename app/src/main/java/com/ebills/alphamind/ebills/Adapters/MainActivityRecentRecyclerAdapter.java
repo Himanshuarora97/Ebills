@@ -1,5 +1,7 @@
 package com.ebills.alphamind.ebills.Adapters;
 
+import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
@@ -20,9 +22,11 @@ import org.json.JSONException;
 public class MainActivityRecentRecyclerAdapter extends RecyclerView.Adapter<MainActivityRecentRecyclerAdapter.ViewHolder> {
 
     private JSONArray jsonArray;
+    private Context ctx;
 
-    public MainActivityRecentRecyclerAdapter(JSONArray jsonArray) {
+    public MainActivityRecentRecyclerAdapter(Context context,JSONArray jsonArray) {
         this.jsonArray = jsonArray;
+        this.ctx = context;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -50,7 +54,7 @@ public class MainActivityRecentRecyclerAdapter extends RecyclerView.Adapter<Main
     @Override
     public void onBindViewHolder(final MainActivityRecentRecyclerAdapter.ViewHolder holder, int position) {
 
-        int color = Color.parseColor("#000000");
+        int color = Color.parseColor(getRandomMaterialColor("400"));
 
         try {
             String shopName = jsonArray.getJSONObject(position).getJSONObject("seller").getString("name");
@@ -81,6 +85,19 @@ public class MainActivityRecentRecyclerAdapter extends RecyclerView.Adapter<Main
     @Override
     public int getItemCount() {
         return jsonArray.length();
+    }
+
+    public String getRandomMaterialColor(String typeColor) {
+        int returnColor = Color.GRAY;
+        int arrayId = ctx.getResources().getIdentifier("colors_" + typeColor, "array", ctx.getPackageName());
+
+        if (arrayId != 0) {
+            TypedArray colors = ctx.getResources().obtainTypedArray(arrayId);
+            int index = (int) (Math.random() * colors.length());
+            returnColor = colors.getColor(index, Color.GRAY);
+            colors.recycle();
+        }
+        return String.format("#%06X", (0xFFFFFF & returnColor));
     }
 
 }

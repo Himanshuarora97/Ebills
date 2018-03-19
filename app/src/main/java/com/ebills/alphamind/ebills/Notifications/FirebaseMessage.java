@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.ebills.alphamind.ebills.MainActivity;
@@ -27,8 +28,9 @@ import org.json.JSONObject;
 public class FirebaseMessage extends FirebaseMessagingService {
 
     // Getting data
-    JSONObject jsonObject = null;
     String pdf, html;
+    private LocalBroadcastManager broadcaster;
+    JSONObject messageObject;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -40,7 +42,7 @@ public class FirebaseMessage extends FirebaseMessagingService {
         notificationBuilder.setContentText(remoteMessage.getNotification().getBody());
 
         try {
-            JSONObject messageObject = new JSONObject(remoteMessage.getData());
+            messageObject = new JSONObject(remoteMessage.getData());
             Log.e("onMessageReceived: ", messageObject.toString());
 //            jsonObject = messageObject.getJSONObject("json");
             pdf = messageObject.getString("pdf");
@@ -61,6 +63,14 @@ public class FirebaseMessage extends FirebaseMessagingService {
         notificationBuilder.setContentIntent(pendingIntent);
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, notificationBuilder.build());
+
+        Intent intent1 = new Intent("data");
+        broadcaster.sendBroadcast(intent1);
+    }
+
+    @Override
+    public void onCreate() {
+        broadcaster = LocalBroadcastManager.getInstance(this);
     }
 
 }
