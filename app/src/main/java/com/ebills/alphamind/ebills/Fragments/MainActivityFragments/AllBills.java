@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.ebills.alphamind.ebills.Adapters.MainActivityAllBillsRecyclerAdapter;
+import com.ebills.alphamind.ebills.Adapters.MainActivityShopNameFrontAdapter;
 import com.ebills.alphamind.ebills.LoginActivity;
 import com.ebills.alphamind.ebills.R;
 import com.ebills.alphamind.ebills.Server.AllBillsServer;
@@ -117,7 +118,7 @@ public class AllBills extends Fragment implements GetData.getDetails{
                 recyclerView.setVisibility(View.VISIBLE);
                 Log.e("onBindViewHolder: ", String.valueOf(jsonArray));
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
-                RecyclerView.Adapter adapter = new MainActivityAllBillsRecyclerAdapter(context , jsonArray);
+                RecyclerView.Adapter adapter = new MainActivityShopNameFrontAdapter(context , jsonArray);
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();

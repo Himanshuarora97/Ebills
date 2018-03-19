@@ -1,6 +1,8 @@
 package com.ebills.alphamind.ebills.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,9 +14,11 @@ import android.widget.TextView;
 import com.ebills.alphamind.ebills.R;
 import com.ebills.alphamind.ebills.Storage.CacheStorage.CacheStorage;
 import com.ebills.alphamind.ebills.Storage.Recent.RecentBillStore;
+import com.ebills.alphamind.ebills.utils.TextDrawable;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by anmol on 19/3/18.
@@ -33,16 +37,43 @@ public class MainActivityShopNameFrontAdapter extends RecyclerView.Adapter<MainA
 
     @Override
     public MainActivityShopNameFrontAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new MainActivityShopNameFrontAdapter.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_main_fragments_card, parent, false));
+        return new MainActivityShopNameFrontAdapter.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_main_bills_card, parent, false));
     }
 
     @Override
     public void onBindViewHolder(final MainActivityShopNameFrontAdapter.ViewHolder holder, int position) {
+//
+//        try {
+//            holder.pName.setText(jsonArray.getJSONObject(position).getString("product_name"));
+//            holder.sName.setText(jsonArray.getJSONObject(position).getString("shop_name"));
+//            holder.priceName.setText(jsonArray.getJSONObject(position).getString("price_name"));
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+
+        int color = Color.parseColor("#000000");
 
         try {
-            holder.pName.setText(jsonArray.getJSONObject(position).getString("product_name"));
-            holder.sName.setText(jsonArray.getJSONObject(position).getString("shop_name"));
-            holder.priceName.setText(jsonArray.getJSONObject(position).getString("price_name"));
+            String shopName = jsonArray.getJSONObject(position).getJSONObject("seller").getString("name");
+            String price1 = jsonArray.getJSONObject(position).getJSONObject("invoice").getString("amount");
+            String price = String.valueOf(Integer.parseInt(price1)*-1);
+            String date = jsonArray.getJSONObject(position).getJSONObject("invoice").getString("date");
+            String year = date.substring(0,4);
+            String month = date.substring(4,6);
+            String dat = date.substring(6);
+            date = dat + "/" + month + "/" + year;
+            TextDrawable myDrawable = TextDrawable.builder().beginConfig()
+                    .textColor(Color.WHITE)
+                    .useFont(Typeface.DEFAULT)
+                    .toUpperCase()
+                    .endConfig()
+            .buildRound(shopName.substring(0, 1), color);
+            holder.imageView.setImageDrawable(myDrawable);
+            holder.sName.setText(price);
+            holder.date.setText(date);
+            holder.priceName.setText(price);
+
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -56,21 +87,24 @@ public class MainActivityShopNameFrontAdapter extends RecyclerView.Adapter<MainA
     class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
-        TextView pName, sName, priceName;
+        TextView sName, date, priceName;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.ClipArt);
-            pName = itemView.findViewById(R.id.ProductName);
-            sName = itemView.findViewById(R.id.ShopName);
+            imageView = itemView.findViewById(R.id.image);
+            date = itemView.findViewById(R.id.date);
+            sName = itemView.findViewById(R.id.shop_name);
             priceName = itemView.findViewById(R.id.PriceName);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    int pos = getAdapterPosition();
+
                     try {
-                        SaveInRecent(pName.getText().toString(), sName.getText().toString(), priceName.getText().toString());
+                        SaveInRecent(jsonArray.getJSONObject(pos));
 
                         //Save
                         SaveBill();
@@ -84,9 +118,9 @@ public class MainActivityShopNameFrontAdapter extends RecyclerView.Adapter<MainA
         }
     }
 
-    public void SaveInRecent(String pName, String sName, String priceName) throws JSONException {
+    public void SaveInRecent(JSONObject jsonObject) throws JSONException {
         RecentBillStore recentBillStore = new RecentBillStore(ctx);
-        recentBillStore.saveBill(pName, sName, priceName);
+        recentBillStore.saveBill(jsonObject);
     }
 
     //Save Bill

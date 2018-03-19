@@ -10,9 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by anmol on 13/3/18.
- */
+
 
 public class RecentBillStore {
 
@@ -22,18 +20,14 @@ public class RecentBillStore {
         this.ctx = ctx;
     }
 
-    public void saveBill(String pName , String sName , String priceName) throws JSONException {
-
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("product_name" , pName);
-        jsonObject.put("shop_name" , sName);
-        jsonObject.put("price_name" , priceName);
+    public void saveBill(JSONObject jsonObject) throws JSONException {
 
         String arr = getBills();
 
         JSONArray jsonArray = new JSONArray(arr);
 
         jsonArray.put(jsonObject);
+
         Log.e("saveBill: ",jsonArray.toString() );
         String r = jsonArray.toString();
 
