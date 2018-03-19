@@ -64,7 +64,11 @@ public class Products extends Fragment {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 JSONArray jsonArray2 = jsonObject.getJSONObject("invoice").getJSONArray("products");
                 for (int i1 = 0; i1 < jsonArray2.length(); i1++) {
-                    if (jsonArray2.getJSONObject(i).getString("STOCKITEMNAME").equals(query)) {
+                    if (jsonArray2.getJSONObject(i).getString("STOCKITEMNAME").equalsIgnoreCase(query)) {
+                        JSONObject jsonObject1 = new JSONObject();
+                        jsonObject1.put("STOCKITEMNAME" , jsonArray2.getJSONObject(i).getString("STOCKITEMNAME"));
+                        jsonObject1.put("BILLEDQTY",jsonArray2.getJSONObject(i).getString("BILLEDQTY"));
+                        jsonObject1.put("AMOUNT",jsonArray2.getJSONObject(i).getString("AMOUNT"));
                         jsonArray1.put(jsonObject);
                     }
                 }
@@ -72,11 +76,12 @@ public class Products extends Fragment {
             rv = v.findViewById(R.id.RecyclerView_Stores);
             layoutManager = new LinearLayoutManager(ctx);
             adapter = new ProductsAdapter(ctx, jsonArray1);
-            return v;
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        return v;
 
     }
 }
