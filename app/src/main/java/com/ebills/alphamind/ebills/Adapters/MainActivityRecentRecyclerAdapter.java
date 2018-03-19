@@ -30,7 +30,7 @@ public class MainActivityRecentRecyclerAdapter extends RecyclerView.Adapter<Main
 
         public ViewHolder(View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.ClipArt);
+            imageView = itemView.findViewById(R.id.image);
             pName = itemView.findViewById(R.id.ProductName);
             sName = itemView.findViewById(R.id.ShopName);
             priceName = itemView.findViewById(R.id.PriceName);

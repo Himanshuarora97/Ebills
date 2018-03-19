@@ -1,30 +1,20 @@
 package com.ebills.alphamind.ebills.Adapters;
 
-import android.app.DownloadManager;
 import android.content.Context;
-import android.net.Uri;
-import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.MimeTypeMap;
-import android.webkit.URLUtil;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ebills.alphamind.ebills.MainActivity;
 import com.ebills.alphamind.ebills.R;
 import com.ebills.alphamind.ebills.Storage.CacheStorage.CacheStorage;
 import com.ebills.alphamind.ebills.Storage.Recent.RecentBillStore;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-
-import java.io.File;
-
-import static android.content.Context.DOWNLOAD_SERVICE;
 
 
 public class MainActivityAllBillsRecyclerAdapter extends RecyclerView.Adapter<MainActivityAllBillsRecyclerAdapter.ViewHolder> {
@@ -68,7 +58,7 @@ public class MainActivityAllBillsRecyclerAdapter extends RecyclerView.Adapter<Ma
         public ViewHolder(View itemView) {
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.ClipArt);
+            imageView = itemView.findViewById(R.id.image);
             pName = itemView.findViewById(R.id.ProductName);
             sName = itemView.findViewById(R.id.ShopName);
             priceName = itemView.findViewById(R.id.PriceName);
