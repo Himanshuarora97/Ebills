@@ -13,6 +13,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
@@ -35,10 +37,11 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private FloatingActionButton floatingActionButton;
-
+    private DrawerLayout sideBar;
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int MY_PERMISSIONS_REQUEST = 1;
 
+    private ActionBarDrawerToggle sideBarToggle;
     String[] PERMISSIONS = {Manifest.permission.READ_SMS,
             Manifest.permission.RECEIVE_SMS,
             Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -49,10 +52,17 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        // CheckPermission
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        sideBar = findViewById(R.id.drawer_layout);
+//        sideBarToggle = new ActionBarDrawerToggle(this, sideBar, toolbar, R.string.sideBarOpen, R.string.sideBarClose);
+//        sideBar.addDrawerListener(sideBarToggle);
+//        sideBarToggle.syncState();
+
         if (hasPermissions(this, PERMISSIONS)) {
+
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             showLayouts();
 
@@ -68,25 +78,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Check Login
-    private void checkLogin(){
+    private void checkLogin() {
 
         Otptoken otptoken = new Otptoken(MainActivity.this);
         String otp = otptoken.getOTP();
-        if (otp.equals(" ")){
+        if (otp.equals(" ")) {
             floatingActionButton.setVisibility(View.VISIBLE);
-        }
-        else{
+        } else {
             floatingActionButton.setVisibility(View.GONE);
         }
     }
 
     //clickFab
-    private void clickFab(){
+    private void clickFab() {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // LoginActivityClass
-                Intent i = new Intent(MainActivity.this , LoginActivity.class);
+                Intent i = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(i);
             }
         });
