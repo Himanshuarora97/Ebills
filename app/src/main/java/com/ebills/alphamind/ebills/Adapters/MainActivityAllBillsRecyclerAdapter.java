@@ -82,9 +82,6 @@ public class MainActivityAllBillsRecyclerAdapter extends RecyclerView.Adapter<Ma
                         //Save
                         SaveBill();
 
-                        //Download
-                        DownloadBill();
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -111,30 +108,4 @@ public class MainActivityAllBillsRecyclerAdapter extends RecyclerView.Adapter<Ma
 
     }
 
-    //Download Bill
-    private void DownloadBill(){
-
-        File direct = new File(Environment.getExternalStorageDirectory()
-                + "/Ebills");
-
-        if (!direct.exists()) {
-            direct.mkdirs();
-        }
-
-//        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(href));
-//        request.setTitle("Image Downloading");
-//        request.setDescription("Downloading.....");
-//        //   request.setMimeType("application/jpeg");
-//        request.allowScanningByMediaScanner();
-//        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-//        final String filename = URLUtil.guessFileName(href, null, MimeTypeMap.getFileExtensionFromUrl(href));
-//        //      request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,filename);
-//        request.setDestinationInExternalPublicDir("/image_downloader", filename);
-//        DownloadManager manager = (DownloadManager)ctx.getSystemService(Context.DOWNLOAD_SERVICE);
-//        manager.enqueue(request);
-//
-
-
-
-    }
 }
