@@ -34,6 +34,9 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
+        app:rippleColor="@color/float_transparent"
+        android:tint="@color/md_white_1000"
+        android:backgroundTint="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
