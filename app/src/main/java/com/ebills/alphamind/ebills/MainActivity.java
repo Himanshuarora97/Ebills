@@ -136,7 +136,6 @@ public class MainActivity extends AppCompatActivity {
                 i.putExtra("query", query);
                 startActivity(i);
                 MainActivity.this.overridePendingTransition(R.anim.anim_slide_left, R.anim.anim_slide_left_two);
-
                 return false;
 
             }
