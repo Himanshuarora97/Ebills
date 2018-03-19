@@ -20,7 +20,7 @@ public class FirebaseTokenService extends FirebaseInstanceIdService {
     @Override
     public void onTokenRefresh() {
         String refreshToken = FirebaseInstanceId.getInstance().getToken();
-        SharedPreferences preferences = getApplicationContext().getSharedPreferences(PREFS, Context.MODE_PRIVATE);
+         SharedPreferences preferences = getApplicationContext().getSharedPreferences(PREFS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("TOKEN", refreshToken);
         editor.apply();

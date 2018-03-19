@@ -12,10 +12,6 @@ public class GetData {
         this.jsonObject = jsonObject;
     }
 
-    public void getDeta(final getDetails getDetails) throws JSONException {
-        getDetails.getD(jsonObject);
-    }
-
     public interface getDetails{
         void getD(JSONObject jsonObject) throws JSONException;
     }
