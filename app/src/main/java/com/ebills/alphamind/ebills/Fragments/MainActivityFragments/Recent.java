@@ -103,12 +103,12 @@ public class Recent extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            Log.e(TAG, "checkCondition: "+ jsonArray.toString());
+            Log.e(TAG, "checkCondition: " + jsonArray.toString());
             if (jsonArray.length() > 0) {
                 textView.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
-                RecyclerView.Adapter adapter = new MainActivityRecentRecyclerAdapter(jsonArray);
+                RecyclerView.Adapter adapter = new MainActivityRecentRecyclerAdapter(getActivity(), jsonArray);
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(adapter);
             } else {
