@@ -58,7 +58,7 @@ public class MainActivityShopNameFrontAdapter extends RecyclerView.Adapter<MainA
         try {
             String shopName = jsonArray.getJSONObject(position).getJSONObject("seller").getString("name");
             String price1 = jsonArray.getJSONObject(position).getJSONObject("invoice").getString("amount");
-            String price = String.valueOf(Integer.parseInt(price1)*-1);
+            String price = String.valueOf(Float.parseFloat(price1)*-1);
             String date = jsonArray.getJSONObject(position).getJSONObject("invoice").getString("date");
             String year = date.substring(0,4);
             String month = date.substring(4,6);
@@ -71,7 +71,7 @@ public class MainActivityShopNameFrontAdapter extends RecyclerView.Adapter<MainA
                     .endConfig()
             .buildRound(shopName.substring(0, 1), color);
             holder.imageView.setImageDrawable(myDrawable);
-            holder.sName.setText(price);
+            holder.sName.setText(shopName);
             holder.date.setText(date);
             holder.priceName.setText(price);
 

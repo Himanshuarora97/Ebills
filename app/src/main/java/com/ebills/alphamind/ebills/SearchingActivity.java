@@ -34,8 +34,6 @@ public class SearchingActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar_one);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         viewPager = (ViewPager) findViewById(R.id.viewpager_one);
         setupViewPager(viewPager);
 
@@ -49,6 +47,7 @@ public class SearchingActivity extends AppCompatActivity {
         adapter.addFragment(new Products(SearchingActivity.this , query), "Products");
         viewPager.setAdapter(adapter);
     }
+
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();

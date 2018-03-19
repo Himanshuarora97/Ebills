@@ -4,16 +4,19 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.ebills.alphamind.ebills.MainActivity;
 import com.ebills.alphamind.ebills.R;
 import com.ebills.alphamind.ebills.Server.GetData;
+import com.ebills.alphamind.ebills.Storage.AllBills.AllBillsStorage;
 import com.ebills.alphamind.ebills.Storage.FBNotification.FBNotification;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,7 +24,7 @@ import org.json.JSONObject;
  * Created by source on 3/15/18.
  */
 
-public class FirebaseMessage extends FirebaseMessagingService{
+public class FirebaseMessage extends FirebaseMessagingService {
 
     // Getting data
     JSONObject jsonObject = null;
@@ -37,13 +40,17 @@ public class FirebaseMessage extends FirebaseMessagingService{
         notificationBuilder.setContentText(remoteMessage.getNotification().getBody());
 
         try {
-            jsonObject = new JSONObject(remoteMessage.getData().get("json"));
-            pdf = remoteMessage.getData().get("pdf");
+            JSONObject messageObject = new JSONObject(remoteMessage.getData());
+            Log.e("onMessageReceived: ", messageObject.toString());
+//            jsonObject = messageObject.getJSONObject("json");
+            pdf = messageObject.getString("pdf");
             html = remoteMessage.getData().get("html");
-            FBNotification fbNotification = new FBNotification(getApplicationContext());
-            fbNotification.saveNotification(html , pdf);
-            GetData getData = new GetData();
-            getData.saveJson(jsonObject);
+            JSONObject jsonObject = new JSONObject(messageObject.getString("json"));
+            Log.e("onMessageReceived: ", jsonObject.toString());
+//            FBNotification fbNotification = new FBNotification(getApplicationContext());
+//            fbNotification.saveNotification(html, pdf);
+            AllBillsStorage allBillsStorage = new AllBillsStorage(getApplicationContext());
+            allBillsStorage.saveJSONObject(jsonObject);
 
         } catch (JSONException e) {
             e.printStackTrace();
