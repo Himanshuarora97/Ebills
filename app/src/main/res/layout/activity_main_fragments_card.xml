@@ -23,10 +23,10 @@
 
             <ImageView
                 android:id="@+id/image"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_centerVertical="true"
-                android:background="@drawable/ic_launcher_background" />
+                android:src="@drawable/ic_launcher_background" />
 
             <!--Product tag start-->
             <RelativeLayout

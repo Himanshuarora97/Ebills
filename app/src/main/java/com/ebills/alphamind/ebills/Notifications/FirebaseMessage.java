@@ -16,6 +16,7 @@ import com.ebills.alphamind.ebills.Storage.FBNotification.FBNotification;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -40,20 +41,16 @@ public class FirebaseMessage extends FirebaseMessagingService {
 
         try {
             JSONObject messageObject = new JSONObject(remoteMessage.getData());
-            Log.e("onMessageReceived: ",messageObject.toString());
+            Log.e("onMessageReceived: ", messageObject.toString());
 //            jsonObject = messageObject.getJSONObject("json");
             pdf = messageObject.getString("pdf");
             html = remoteMessage.getData().get("html");
             JSONObject jsonObject = new JSONObject(messageObject.getString("json"));
-            Log.e("onMessageReceived: ",jsonObject.toString());
+            Log.e("onMessageReceived: ", jsonObject.toString());
 //            FBNotification fbNotification = new FBNotification(getApplicationContext());
 //            fbNotification.saveNotification(html, pdf);
-            String l = jsonObject.toString();
-            Log.e("allbillstorage", l);
-            SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(String.valueOf(R.string.AllBills_Storage), Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString(String.valueOf(R.string.AllBills_Storage), l);
-            editor.apply();
+            AllBillsStorage allBillsStorage = new AllBillsStorage(getApplicationContext());
+            allBillsStorage.saveJSONObject(jsonObject);
 
         } catch (JSONException e) {
             e.printStackTrace();

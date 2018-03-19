@@ -43,11 +43,11 @@ public class SearchingActivity extends AppCompatActivity {
         // Query
         String query = getIntent().getExtras().getString("query");
 
-        try {
-            doMySearch(query);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            doMySearch(query);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
 
         setupWindowAnimations();
 
@@ -67,40 +67,37 @@ public class SearchingActivity extends AppCompatActivity {
 
     // Query String
     // Search Here
-    public void doMySearch(String query) throws JSONException {
+//    public void doMySearch(String query) throws JSONException {
+//
+////        searchText.setText(query);
+//
+//        AllBillsStorage allBillsStorage = new AllBillsStorage(SearchingActivity.this);
+//        JSONArray jsonArray = new JSONArray(allBillsStorage.getBillsSto());
+//
+//        ArrayList<JSONObject> arr = new ArrayList<JSONObject>();
+//
+//        for (int i = 0 ; i<jsonArray.length() ;i++){
+//            JSONObject jsonObject = jsonArray.getJSONObject(i);
+//            if (jsonObject.getJSONObject("seller").getString("name").equals(query)){
+//                arr.add(jsonObject);
+//            }
+//            if (String.valueOf(Integer.parseInt(jsonObject.getJSONObject("invoice").getString("amount")) * (-1)).equals(query))){
+//                arr.add(jsonObject);
+//            }
+//            if (jsonObject.getJSONObject("invoice").getString("date").contains(query)){
+//                arr.add(jsonObject);
+//            }
+//            JSONArray jsonArray1 = jsonObject.getJSONObject("invoice").getJSONArray("products");
+//
+////            for (int i = 0 ; i<jsonArray1.length() ; i++){
+////                if (jsonArray1.getJSONObject(i).getString("STOCKITEMNAME").equals(query)){
+////                    arr.add(jsonObject);
+////                }
+////            }
+//        }
+//
+//
 
-//        searchText.setText(query);
-
-        AllBillsStorage allBillsStorage = new AllBillsStorage(SearchingActivity.this);
-        JSONArray jsonArray = new JSONArray(allBillsStorage.getBillsSto());
-
-        ArrayList<JSONObject> arr = new ArrayList<JSONObject>();
-
-        for (int i = 0 ; i<jsonArray.length() ;i++){
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-            if (jsonObject.getJSONObject("seller").getString("name").equals(query)){
-                arr.add(jsonObject);
-            }
-            if (String.valueOf(Integer.parseInt(jsonObject.getJSONObject("invoice").getString("amount")) * (-1)).equals(query))){
-                arr.add(jsonObject);
-            }
-            if (jsonObject.getJSONObject("invoice").getString("date").contains(query)){
-                arr.add(jsonObject);
-            }
-            JSONArray jsonArray1 = jsonObject.getJSONObject("invoice").getJSONArray("products");
-
-            for (int i = 0 ; i<jsonArray1.length() ; i++){
-                if (jsonArray1.getJSONObject(i).getString("STOCKITEMNAME").equals(query)){
-                    arr.add(jsonObject);
-                }
-            }
-        }
-
-
-
-
-
-    }
 
 
     //setting up animation
