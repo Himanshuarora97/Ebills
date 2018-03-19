@@ -14,9 +14,6 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.Stack;
 
-/**
- * Created by anmol on 16/3/18.
- */
 
 public class CacheStorage {
 
@@ -35,6 +32,7 @@ public class CacheStorage {
 
         if (stack.size()>5){
             stack.pop();
+            stack.push(path);
         }
         else{
             stack.push(path);

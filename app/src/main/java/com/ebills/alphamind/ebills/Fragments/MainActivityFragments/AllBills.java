@@ -84,7 +84,7 @@ public class AllBills extends Fragment {
                             recyclerView.setVisibility(View.VISIBLE);
                             Log.e("onBindViewHolder: ", String.valueOf(jsonArray));
                             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
-                            RecyclerView.Adapter adapter = new MainActivityAllBillsRecyclerAdapter(jsonArray);
+                            RecyclerView.Adapter adapter = new MainActivityAllBillsRecyclerAdapter(context , jsonArray);
                             recyclerView.setLayoutManager(layoutManager);
                             recyclerView.setAdapter(adapter);
                         } else {

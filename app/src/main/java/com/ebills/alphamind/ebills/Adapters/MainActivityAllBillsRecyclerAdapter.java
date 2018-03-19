@@ -21,17 +21,11 @@ public class MainActivityAllBillsRecyclerAdapter extends RecyclerView.Adapter<Ma
     JSONArray jsonArray;
     Context ctx;
 
-    public MainActivityAllBillsRecyclerAdapter(JSONArray jsonArray) {
+    public MainActivityAllBillsRecyclerAdapter(Context ctx , JSONArray jsonArray) {
         Log.e("onBindViewHolder: ", String.valueOf(jsonArray));
         this.jsonArray = jsonArray;
         this.ctx = ctx;
     }
-
-    public void SaveInRecent(String pName, String sName, String priceName) throws JSONException {
-        RecentBillStore recentBillStore = new RecentBillStore(ctx);
-        recentBillStore.saveBill(pName, sName, priceName);
-    }
-
 
     @Override
     public MainActivityAllBillsRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -82,4 +76,8 @@ public class MainActivityAllBillsRecyclerAdapter extends RecyclerView.Adapter<Ma
         }
     }
 
+    public void SaveInRecent(String pName, String sName, String priceName) throws JSONException {
+        RecentBillStore recentBillStore = new RecentBillStore(ctx);
+        recentBillStore.saveBill(pName, sName, priceName);
+    }
 }

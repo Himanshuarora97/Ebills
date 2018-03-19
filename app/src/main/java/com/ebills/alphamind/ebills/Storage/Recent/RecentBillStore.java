@@ -28,7 +28,9 @@ public class RecentBillStore {
         jsonObject.put("shop_name" , sName);
         jsonObject.put("price_name" , priceName);
 
-        JSONArray jsonArray = new JSONArray(getBills());
+        String arr = getBills();
+
+        JSONArray jsonArray = new JSONArray(arr);
 
         jsonArray.put(jsonObject);
 
