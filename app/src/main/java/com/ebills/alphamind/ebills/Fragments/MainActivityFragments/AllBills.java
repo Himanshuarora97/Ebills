@@ -78,7 +78,6 @@ public class AllBills extends Fragment implements GetData.getDetails{
 
         Otptoken otptoken = new Otptoken(context);
         if (otptoken.getOTP().equals(" ")){
-
             tx.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
             textView.setVisibility(View.GONE);
@@ -113,13 +112,20 @@ public class AllBills extends Fragment implements GetData.getDetails{
 
             AllBillsStorage allBillsStorage = new AllBillsStorage(context);
             JSONArray jsonArray = new JSONArray(allBillsStorage.getBillsSto());
-            recyclerView.setVisibility(View.VISIBLE);
-            Log.e("onBindViewHolder: ", String.valueOf(jsonArray));
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
-            RecyclerView.Adapter adapter = new MainActivityAllBillsRecyclerAdapter(context , jsonArray);
-            recyclerView.setLayoutManager(layoutManager);
-            recyclerView.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
+            if (jsonArray.length() > 0){
+                textView.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+                Log.e("onBindViewHolder: ", String.valueOf(jsonArray));
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
+                RecyclerView.Adapter adapter = new MainActivityAllBillsRecyclerAdapter(context , jsonArray);
+                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+            }
+            else{
+                textView.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
+            }
         }
 
     }

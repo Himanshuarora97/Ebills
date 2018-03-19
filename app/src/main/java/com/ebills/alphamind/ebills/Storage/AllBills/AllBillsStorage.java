@@ -28,7 +28,6 @@ public class AllBillsStorage {
         JSONArray jsonArray = new JSONArray(getBillsSto());
         jsonArray.put(jsonObject);
         String l = jsonArray.toString();
-
         Log.e("allbillstorage" , l);
         SharedPreferences sharedPref = ctx.getSharedPreferences(String.valueOf(R.string.AllBills_Storage), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
