@@ -72,13 +72,13 @@ public class Recent extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        Log.e(TAG, "isVisiableToUser: " + isVisibleToUser + "isAlreadyShow" + isAlreadyShow);
+//        Log.e(TAG, "isVisiableToUser: " + isVisibleToUser + "isAlreadyShow" + isAlreadyShow);
         if (isVisibleToUser) {
             if (!isAlreadyShow) {
                 isAlreadyShow = true;
-                Log.e(TAG, "setUserVisibleHint: ");
+//                Log.e(TAG, "setUserVisibleHint: ");
             } else {
-                Log.e(TAG, "IsAlreadyShow: ");
+//                Log.e(TAG, "IsAlreadyShow: ");
                 checkCondition();
             }
         }
