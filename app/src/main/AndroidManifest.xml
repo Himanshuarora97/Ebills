@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
     <application
         android:name="com.orm.SugarApp"
         android:allowBackup="true"
@@ -40,29 +39,22 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".SearchingActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ShopPageActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".OTPVerificationActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".NewAccountActivity"
             android:screenOrientation="portrait" />
@@ -72,14 +64,13 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
         <service android:name=".Notifications.FirebaseMessage">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <!--<activity android:namShopPageActivityvity"-->
-        <!--android:screenOrientation="portrait"></activity>-->
+        <!-- <activity android:namShopPageActivityvity" -->
+        <!-- android:screenOrientation="portrait"></activity> -->
 
         <receiver android:name=".sms.smsReceiver">
             <intent-filter>
@@ -87,5 +78,7 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".DownloadActivity"></activity>
     </application>
+
 </manifest>

@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.search, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuItem search = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) search.getActionView();
         searchView.setQueryHint("Search the Animations");
@@ -149,6 +149,17 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onCreateOptionsMenu(menu);
 
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.download:
+                Intent intent = new Intent(MainActivity.this, DownloadActivity.class);
+                startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public static boolean hasPermissions(Context context, String... permissions) {
