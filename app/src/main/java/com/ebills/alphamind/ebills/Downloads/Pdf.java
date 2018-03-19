@@ -88,9 +88,6 @@ public class Pdf {
         };
 
         ctx.registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-
-
-
     }
 
 }

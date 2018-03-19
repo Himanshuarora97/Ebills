@@ -9,6 +9,8 @@ import android.util.Log;
 
 import com.ebills.alphamind.ebills.MainActivity;
 import com.ebills.alphamind.ebills.R;
+import com.ebills.alphamind.ebills.Server.GetData;
+import com.ebills.alphamind.ebills.Storage.FBNotification.FBNotification;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -19,7 +21,12 @@ import org.json.JSONObject;
  * Created by source on 3/15/18.
  */
 
-public class FirebaseMessage extends FirebaseMessagingService {
+public class FirebaseMessage extends FirebaseMessagingService{
+
+    // Getting data
+    JSONObject jsonObject = null;
+    String pdf, html;
+
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         Intent intent = new Intent(this, MainActivity.class);
@@ -29,13 +36,15 @@ public class FirebaseMessage extends FirebaseMessagingService {
         notificationBuilder.setContentTitle("FCM notification");
         notificationBuilder.setContentText(remoteMessage.getNotification().getBody());
 
-        // Getting data
-        JSONObject jsonObject = null;
-        String pdf,html;
         try {
             jsonObject = new JSONObject(remoteMessage.getData().get("json"));
             pdf = remoteMessage.getData().get("pdf");
             html = remoteMessage.getData().get("html");
+            FBNotification fbNotification = new FBNotification(getApplicationContext());
+            fbNotification.saveNotification(jsonObject);
+            GetData getData = new GetData();
+            getData.saveJson(jsonObject);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -45,6 +54,14 @@ public class FirebaseMessage extends FirebaseMessagingService {
         notificationBuilder.setContentIntent(pendingIntent);
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, notificationBuilder.build());
+    }
+
+    public void Det(final getData getData){
+
+    }
+
+    public interface getData{
+        void details(JSONObject jsonObject);
     }
 
 }
