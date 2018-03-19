@@ -103,6 +103,7 @@ public class Recent extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            Log.e(TAG, "checkCondition: "+ jsonArray.toString());
             if (jsonArray.length() > 0) {
                 textView.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
