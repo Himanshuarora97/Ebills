@@ -77,7 +77,7 @@ public class Store extends Fragment {
             }
 
             rv = v.findViewById(R.id.RecyclerView_Stores);
-            adapter = new ProductsAdapter(ctx, jsonArray1);
+            adapter = new MainActivityShopNameFrontAdapter(ctx, jsonArray1);
             layoutManager = new LinearLayoutManager(ctx);
             rv.setAdapter(adapter);
             rv.setLayoutManager(layoutManager);
