@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.ebills.alphamind.ebills.ProductMainActivity;
 import com.ebills.alphamind.ebills.R;
 import com.ebills.alphamind.ebills.ShopPageActivity;
+import com.ebills.alphamind.ebills.Storage.FBNotification.FBNotification;
 import com.ebills.alphamind.ebills.utils.TextDrawable;
 
 import org.json.JSONArray;
@@ -28,12 +29,12 @@ public class MainActivityRecentRecyclerAdapter extends RecyclerView.Adapter<Main
     private Context ctx;
     boolean ok = false;
 
-    public MainActivityRecentRecyclerAdapter(Context context,JSONArray jsonArray) {
+    public MainActivityRecentRecyclerAdapter(Context context, JSONArray jsonArray) {
         this.jsonArray = jsonArray;
         this.ctx = context;
     }
 
-    public MainActivityRecentRecyclerAdapter(Context context,JSONArray jsonArray,boolean ok) {
+    public MainActivityRecentRecyclerAdapter(Context context, JSONArray jsonArray, boolean ok) {
         this.jsonArray = jsonArray;
         this.ctx = context;
         this.ok = ok;
@@ -53,7 +54,7 @@ public class MainActivityRecentRecyclerAdapter extends RecyclerView.Adapter<Main
             sName = itemView.findViewById(R.id.shop_name);
             priceName = itemView.findViewById(R.id.PriceName);
 
-            if (ok){
+            if (ok) {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -72,9 +73,7 @@ public class MainActivityRecentRecyclerAdapter extends RecyclerView.Adapter<Main
                     }
                 });
 
-            }
-
-            else{
+            } else {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -85,6 +84,10 @@ public class MainActivityRecentRecyclerAdapter extends RecyclerView.Adapter<Main
                             //ProductAdapter
                             Intent i = new Intent(ctx, ProductMainActivity.class);
                             i.putExtra("products", String.valueOf(jsonArray.getJSONObject(pos).getJSONObject("invoice").getJSONArray("products")));
+                            FBNotification fbNotification = new FBNotification(ctx);
+                            JSONArray jsonArray1 = new JSONArray(fbNotification.getNotification());
+                            i.putExtra("html", jsonArray1.getJSONObject(pos).getString("HTML"));
+                            i.putExtra("pdf", jsonArray1.getJSONObject(pos).getString("PDF"));
                             ctx.startActivity(i);
 
                         } catch (JSONException e) {
@@ -111,10 +114,10 @@ public class MainActivityRecentRecyclerAdapter extends RecyclerView.Adapter<Main
         try {
             String shopName = jsonArray.getJSONObject(position).getJSONObject("seller").getString("name");
             String price1 = jsonArray.getJSONObject(position).getJSONObject("invoice").getString("amount");
-            String price = String.valueOf(Float.parseFloat(price1)*-1);
+            String price = String.valueOf(Float.parseFloat(price1) * -1);
             String date = jsonArray.getJSONObject(position).getJSONObject("invoice").getString("date");
-            String year = date.substring(0,4);
-            String month = date.substring(4,6);
+            String year = date.substring(0, 4);
+            String month = date.substring(4, 6);
             String dat = date.substring(6);
             date = dat + "/" + month + "/" + year;
             TextDrawable myDrawable = TextDrawable.builder().beginConfig()

@@ -49,8 +49,8 @@ public class FirebaseMessage extends FirebaseMessagingService {
             html = remoteMessage.getData().get("html");
             JSONObject jsonObject = new JSONObject(messageObject.getString("json"));
             Log.e("onMessageReceived: ", jsonObject.toString());
-//            FBNotification fbNotification = new FBNotification(getApplicationContext());
-//            fbNotification.saveNotification(html, pdf);
+            FBNotification fbNotification = new FBNotification(getApplicationContext());
+            fbNotification.saveNotification(html, pdf);
             AllBillsStorage allBillsStorage = new AllBillsStorage(getApplicationContext());
             allBillsStorage.saveJSONObject(jsonObject);
 

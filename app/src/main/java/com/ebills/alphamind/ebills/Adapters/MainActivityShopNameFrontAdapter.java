@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.ebills.alphamind.ebills.ProductMainActivity;
 import com.ebills.alphamind.ebills.R;
 import com.ebills.alphamind.ebills.Storage.CacheStorage.CacheStorage;
+import com.ebills.alphamind.ebills.Storage.FBNotification.FBNotification;
 import com.ebills.alphamind.ebills.Storage.Recent.RecentBillStore;
 import com.ebills.alphamind.ebills.utils.TextDrawable;
 
@@ -115,10 +116,14 @@ public class MainActivityShopNameFrontAdapter extends RecyclerView.Adapter<MainA
                         //ProductAdapter
                         Intent i = new Intent(ctx, ProductMainActivity.class);
                         i.putExtra("products", String.valueOf(jsonArray.getJSONObject(pos).getJSONObject("invoice").getJSONArray("products")));
+                        FBNotification fbNotification = new FBNotification(ctx);
+                        JSONArray jsonArray1 = new JSONArray(fbNotification.getNotification());
+                        i.putExtra("html", jsonArray1.getJSONObject(pos).getString("HTML"));
+                        i.putExtra("pdf", jsonArray1.getJSONObject(pos).getString("PDF"));
                         ctx.startActivity(i);
 
                     } catch (JSONException e) {
-                        Log.e("onClick: ",e.toString());
+                        Log.e("onClick: ", e.toString());
                         e.printStackTrace();
                     }
                 }
@@ -128,7 +133,7 @@ public class MainActivityShopNameFrontAdapter extends RecyclerView.Adapter<MainA
     }
 
     public void SaveInRecent(JSONObject jsonObject) throws JSONException {
-        Log.e("SaveInRecent: ",jsonObject.toString());
+        Log.e("SaveInRecent: ", jsonObject.toString());
         RecentBillStore recentBillStore = new RecentBillStore(ctx);
         recentBillStore.saveBill(jsonObject);
     }

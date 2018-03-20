@@ -231,7 +231,11 @@ public class MainActivity extends AppCompatActivity {
                     // permission is DENIED !!
                     if (read_sms && recieve_sms && storage) {
                         showLayouts();
-                        Log.e(TAG, "onRequestPermissionsResult: ");
+                        // Check Login
+                        checkLogin();
+
+                        // FLoating Action Button Click Listener
+                        clickFab();
                     } else {
                         Snackbar.make(findViewById(android.R.id.content),
                                 "Please Grant Permissions to read OTP from messages",

@@ -59,9 +59,11 @@
             android:name=".NewAccountActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ProductMainActivity"
-            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ProductMainActivity"
+            android:screenOrientation="portrait" />
 
+        <activity android:name=".ShowingBillActivity" />
 
         <service android:name=".Notifications.FirebaseTokenService">
             <intent-filter>
