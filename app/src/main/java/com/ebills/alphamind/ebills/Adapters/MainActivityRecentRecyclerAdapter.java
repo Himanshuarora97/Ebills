@@ -1,6 +1,7 @@
 package com.ebills.alphamind.ebills.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ebills.alphamind.ebills.ProductMainActivity;
 import com.ebills.alphamind.ebills.R;
 import com.ebills.alphamind.ebills.utils.TextDrawable;
 
@@ -41,6 +43,24 @@ public class MainActivityRecentRecyclerAdapter extends RecyclerView.Adapter<Main
             date = itemView.findViewById(R.id.date);
             sName = itemView.findViewById(R.id.shop_name);
             priceName = itemView.findViewById(R.id.PriceName);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    int pos = getAdapterPosition();
+
+                    try {
+                        //ProductAdapter
+                        Intent i = new Intent(ctx, ProductMainActivity.class);
+                        i.putExtra("products", String.valueOf(jsonArray.getJSONObject(pos).getJSONObject("invoice").getJSONArray("products")));
+                        ctx.startActivity(i);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
 
         }
     }
