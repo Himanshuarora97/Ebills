@@ -62,13 +62,13 @@ public class Store extends Fragment {
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                if (jsonObject.getJSONObject("seller").getString("name").contains(query)) {
+                if (jsonObject.getJSONObject("seller").getString("name").toLowerCase().contains(query)) {
                     jsonArray1.put(jsonObject);
                 }
-                if (String.valueOf(Math.abs(Integer.parseInt(jsonObject.getJSONObject("invoice").getString("amount")))).contains(query)) {
+                if (String.valueOf(Math.abs(Float.parseFloat(jsonObject.getJSONObject("invoice").getString("amount")))).toLowerCase().contains(query)) {
                     jsonArray1.put(jsonObject);
                 }
-                if (jsonObject.getJSONObject("invoice").getString("date").contains(query)) {
+                if (jsonObject.getJSONObject("invoice").getString("date").toLowerCase().contains(query)) {
                     jsonArray1.put(jsonObject);
                 }
             }

@@ -1,6 +1,9 @@
 package com.ebills.alphamind.ebills.Adapters;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,12 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ebills.alphamind.ebills.R;
-import com.ebills.alphamind.ebills.Storage.CacheStorage.CacheStorage;
-import com.ebills.alphamind.ebills.Storage.Recent.RecentBillStore;
+import com.ebills.alphamind.ebills.utils.TextDrawable;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
@@ -23,7 +24,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
     JSONArray jsonArray;
     Context ctx;
 
-    public ProductsAdapter(Context ctx , JSONArray jsonArray) {
+    public ProductsAdapter(Context ctx, JSONArray jsonArray) {
         Log.e("onBindViewHolder: ", String.valueOf(jsonArray));
         this.jsonArray = jsonArray;
         this.ctx = ctx;
@@ -37,16 +38,24 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ProductsAdapter.ViewHolder holder, int position) {
 
-
+        Log.e("onBindViewHolder: ",jsonArray.toString() );
+        int color = Color.parseColor(getRandomMaterialColor("400"));
         try {
             String pN = jsonArray.getJSONObject(position).getString("STOCKITEMNAME");
             String Quat = jsonArray.getJSONObject(position).getString("BILLEDQTY");
             String amt = jsonArray.getJSONObject(position).getString("AMOUNT");
-
+            TextDrawable myDrawable = TextDrawable.builder().beginConfig()
+                    .textColor(Color.WHITE)
+                    .useFont(Typeface.DEFAULT)
+                    .toUpperCase()
+                    .endConfig()
+                    .buildRound(pN.substring(0, 1), color);
+            holder.imageView.setImageDrawable(myDrawable);
             holder.pName.setText(pN);
-            holder.quant.setText(Quat);
+            holder.quant.setText("Quantity" + Quat);
             holder.priceName.setText(amt);
         } catch (JSONException e) {
+            Log.e( "onBindViewHolder: ",e.toString() );
             e.printStackTrace();
         }
 
@@ -60,7 +69,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
     class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
-        TextView pName,quant, priceName;
+        TextView pName, quant, priceName;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -71,6 +80,19 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
             priceName = itemView.findViewById(R.id.PriceName);
 
         }
+    }
+
+    public String getRandomMaterialColor(String typeColor) {
+        int returnColor = Color.GRAY;
+        int arrayId = ctx.getResources().getIdentifier("colors_" + typeColor, "array", ctx.getPackageName());
+
+        if (arrayId != 0) {
+            TypedArray colors = ctx.getResources().obtainTypedArray(arrayId);
+            int index = (int) (Math.random() * colors.length());
+            returnColor = colors.getColor(index, Color.GRAY);
+            colors.recycle();
+        }
+        return String.format("#%06X", (0xFFFFFF & returnColor));
     }
 
 }

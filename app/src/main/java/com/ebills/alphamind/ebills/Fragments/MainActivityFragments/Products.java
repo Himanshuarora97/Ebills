@@ -66,12 +66,12 @@ public class Products extends Fragment {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 JSONArray jsonArray2 = jsonObject.getJSONObject("invoice").getJSONArray("products");
                 for (int i1 = 0; i1 < jsonArray2.length(); i1++) {
-                    if (jsonArray2.getJSONObject(i1).getString("STOCKITEMNAME").contains(query)) {
+                    if (jsonArray2.getJSONObject(i1).getString("STOCKITEMNAME").toLowerCase().contains(query)) {
                         JSONObject jsonObject1 = new JSONObject();
                         jsonObject1.put("STOCKITEMNAME" , jsonArray2.getJSONObject(i1).getString("STOCKITEMNAME"));
                         jsonObject1.put("BILLEDQTY",jsonArray2.getJSONObject(i1).getString("BILLEDQTY"));
                         jsonObject1.put("AMOUNT",jsonArray2.getJSONObject(i1).getString("AMOUNT"));
-                        jsonArray1.put(jsonObject);
+                        jsonArray1.put(jsonObject1);
                     }
                 }
             }
@@ -82,6 +82,7 @@ public class Products extends Fragment {
             rv.setAdapter(adapter);
             rv.setLayoutManager(layoutManager);
         } catch (JSONException e) {
+            Log.e("onCreateView: ",e.toString() );
             e.printStackTrace();
         }
 

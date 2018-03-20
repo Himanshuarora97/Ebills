@@ -21,7 +21,6 @@ import com.ebills.alphamind.ebills.R;
 import com.ebills.alphamind.ebills.Server.GetData;
 import com.ebills.alphamind.ebills.Storage.AllBills.AllBillsStorage;
 import com.ebills.alphamind.ebills.Storage.OTPToken.Otptoken;
-import com.ebills.alphamind.ebills.utils.ServiceCallbacks;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,7 +32,7 @@ import org.json.JSONObject;
 // pn ,pdesc ,  , sn , price , saddress , sdescription
 
 @SuppressLint("ValidFragment")
-public class AllBills extends Fragment implements GetData.getDetails, ServiceCallbacks {
+public class AllBills extends Fragment implements GetData.getDetails{
 
     private static final String TAG = AllBills.class.getSimpleName();
     RecyclerView recyclerView;
@@ -140,16 +139,6 @@ public class AllBills extends Fragment implements GetData.getDetails, ServiceCal
         Log.e("Okay", "Yes it is doing............................");
         AllBillsStorage allBillsStorage = new AllBillsStorage(context);
         allBillsStorage.saveJSONObject(jsonObject);
-    }
-
-    @Override
-    public void doSomething() {
-        Log.e("TAG", "doSomething: ");
-        try {
-            checkCondition();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

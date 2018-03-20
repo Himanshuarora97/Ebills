@@ -105,19 +105,20 @@ public class MainActivityShopNameFrontAdapter extends RecyclerView.Adapter<MainA
                 public void onClick(View view) {
 
                     int pos = getAdapterPosition();
+                    Log.e("onClick: ", "item Click");
 
                     try {
                         SaveInRecent(jsonArray.getJSONObject(pos));
 
 //                        //Save
 //                        SaveBill();
-
                         //ProductAdapter
                         Intent i = new Intent(ctx, ProductMainActivity.class);
                         i.putExtra("products", String.valueOf(jsonArray.getJSONObject(pos).getJSONObject("invoice").getJSONArray("products")));
                         ctx.startActivity(i);
 
                     } catch (JSONException e) {
+                        Log.e("onClick: ",e.toString());
                         e.printStackTrace();
                     }
                 }
@@ -127,6 +128,7 @@ public class MainActivityShopNameFrontAdapter extends RecyclerView.Adapter<MainA
     }
 
     public void SaveInRecent(JSONObject jsonObject) throws JSONException {
+        Log.e("SaveInRecent: ",jsonObject.toString());
         RecentBillStore recentBillStore = new RecentBillStore(ctx);
         recentBillStore.saveBill(jsonObject);
     }
