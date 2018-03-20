@@ -63,7 +63,8 @@
             android:name=".ProductMainActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ShowingBillActivity" />
+        <activity android:name=".ShowingBillActivity"
+            android:screenOrientation="portrait"/>
 
         <service android:name=".Notifications.FirebaseTokenService">
             <intent-filter>
