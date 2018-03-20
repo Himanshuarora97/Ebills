@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.ebills.alphamind.ebills.Adapters.ShopPageActivity_HorizontalProductsAdapter;
+import com.ebills.alphamind.ebills.Adapters.Shop_Page_Vertical;
 import com.glide.slider.library.Animations.DescriptionAnimation;
 import com.glide.slider.library.SliderLayout;
 import com.glide.slider.library.SliderTypes.BaseSliderView;
@@ -24,7 +25,6 @@ public class ShopPageActivity extends AppCompatActivity implements BaseSliderVie
     private RecyclerView horizontal,vertical;
     private RecyclerView.LayoutManager l1,l2;
     private RecyclerView.Adapter a1,a2;
-
 
 
     @Override
@@ -47,7 +47,7 @@ public class ShopPageActivity extends AppCompatActivity implements BaseSliderVie
 
         Initialize();
         ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("https://www.freelogodesign.org/img/logo-ex-4.png");
+        arrayList.add("");
         arrayList.add("https://www.freelogodesign.org/img/logo-ex-7.png");
         arrayList.add("http://www.merayarnett.com/wp-content/uploads/2017/11/Awesome-Bussiness-Logos-54-With-Additional-Best-Fonts-For-Logos-with-Bussiness-Logos.jpg");
         arrayList.add("https://www.freelogodesign.org/img/logo-ex-6.png");
@@ -83,7 +83,7 @@ public class ShopPageActivity extends AppCompatActivity implements BaseSliderVie
         vertical.setNestedScrollingEnabled(false);
         l2 = new LinearLayoutManager(this);
         vertical.setLayoutManager(l2);
-        vertical.setAdapter(new ShopPageActivity_HorizontalProductsAdapter(ShopPageActivity.this));
+        vertical.setAdapter(new Shop_Page_Vertical(ShopPageActivity.this));
 
     }
 
