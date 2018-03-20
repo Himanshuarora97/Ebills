@@ -66,7 +66,7 @@ public class Products extends Fragment {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 JSONArray jsonArray2 = jsonObject.getJSONObject("invoice").getJSONArray("products");
                 for (int i1 = 0; i1 < jsonArray2.length(); i1++) {
-                    if (jsonArray2.getJSONObject(i1).getString("STOCKITEMNAME").equalsIgnoreCase(query)) {
+                    if (jsonArray2.getJSONObject(i1).getString("STOCKITEMNAME").contains(query)) {
                         JSONObject jsonObject1 = new JSONObject();
                         jsonObject1.put("STOCKITEMNAME" , jsonArray2.getJSONObject(i1).getString("STOCKITEMNAME"));
                         jsonObject1.put("BILLEDQTY",jsonArray2.getJSONObject(i1).getString("BILLEDQTY"));

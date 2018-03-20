@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ebills.alphamind.ebills.Adapters.MainActivityShopNameFrontAdapter;
-import com.ebills.alphamind.ebills.Adapters.ProductsAdapter;
-import com.ebills.alphamind.ebills.Adapters.ShopPageActivity_HorizontalProductsAdapter;
 import com.ebills.alphamind.ebills.R;
 import com.ebills.alphamind.ebills.Storage.AllBills.AllBillsStorage;
 
@@ -20,7 +18,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 
 /**
  * Created by anmol on 20/3/18.
@@ -65,10 +62,10 @@ public class Store extends Fragment {
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                if (jsonObject.getJSONObject("seller").getString("name").equals(query)) {
+                if (jsonObject.getJSONObject("seller").getString("name").contains(query)) {
                     jsonArray1.put(jsonObject);
                 }
-                if (String.valueOf(Float.parseFloat(jsonObject.getJSONObject("invoice").getString("amount")) * (-1)).equals(query)) {
+                if (String.valueOf(Math.abs(Integer.parseInt(jsonObject.getJSONObject("invoice").getString("amount")))).contains(query)) {
                     jsonArray1.put(jsonObject);
                 }
                 if (jsonObject.getJSONObject("invoice").getString("date").contains(query)) {

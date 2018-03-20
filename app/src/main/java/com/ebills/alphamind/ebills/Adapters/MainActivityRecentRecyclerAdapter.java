@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.ebills.alphamind.ebills.ProductMainActivity;
 import com.ebills.alphamind.ebills.R;
+import com.ebills.alphamind.ebills.ShopPageActivity;
 import com.ebills.alphamind.ebills.utils.TextDrawable;
 
 import org.json.JSONArray;
@@ -25,11 +26,19 @@ public class MainActivityRecentRecyclerAdapter extends RecyclerView.Adapter<Main
 
     private JSONArray jsonArray;
     private Context ctx;
+    boolean ok = false;
 
     public MainActivityRecentRecyclerAdapter(Context context,JSONArray jsonArray) {
         this.jsonArray = jsonArray;
         this.ctx = context;
     }
+
+    public MainActivityRecentRecyclerAdapter(Context context,JSONArray jsonArray,boolean ok) {
+        this.jsonArray = jsonArray;
+        this.ctx = context;
+        this.ok = ok;
+    }
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -44,24 +53,47 @@ public class MainActivityRecentRecyclerAdapter extends RecyclerView.Adapter<Main
             sName = itemView.findViewById(R.id.shop_name);
             priceName = itemView.findViewById(R.id.PriceName);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+            if (ok){
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
-                    int pos = getAdapterPosition();
+                        int pos = getAdapterPosition();
 
-                    try {
-                        //ProductAdapter
-                        Intent i = new Intent(ctx, ProductMainActivity.class);
-                        i.putExtra("products", String.valueOf(jsonArray.getJSONObject(pos).getJSONObject("invoice").getJSONArray("products")));
-                        ctx.startActivity(i);
+                        try {
+                            //ProductAdapter
+                            Intent i = new Intent(ctx, ShopPageActivity.class);
+                            i.putExtra("products", String.valueOf(jsonArray.getJSONObject(pos).getJSONObject("invoice").getJSONArray("products")));
+                            ctx.startActivity(i);
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
-            });
+                });
 
+            }
+
+            else{
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        int pos = getAdapterPosition();
+
+                        try {
+                            //ProductAdapter
+                            Intent i = new Intent(ctx, ProductMainActivity.class);
+                            i.putExtra("products", String.valueOf(jsonArray.getJSONObject(pos).getJSONObject("invoice").getJSONArray("products")));
+                            ctx.startActivity(i);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+            }
         }
     }
 

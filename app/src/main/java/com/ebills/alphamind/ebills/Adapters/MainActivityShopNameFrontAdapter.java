@@ -143,16 +143,4 @@ public class MainActivityShopNameFrontAdapter extends RecyclerView.Adapter<MainA
         }
         return String.format("#%06X", (0xFFFFFF & returnColor));
     }
-//
-//    //Save Bill
-//    private void SaveBill() throws JSONException {
-//        // HTML saved
-//
-//        CacheStorage cacheStorage = new CacheStorage(ctx);
-//
-//        // Saving file
-//        String str = null;
-//        cacheStorage.saveFile(str);
-//
-//    }
 }

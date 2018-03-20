@@ -45,8 +45,8 @@ public class SearchingActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         Log.e("setupViewPager: ",query);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new Products(SearchingActivity.this , query), "Bills");
         adapter.addFragment(new Store(SearchingActivity.this , query), "Stores");
-        adapter.addFragment(new Products(SearchingActivity.this , query), "Products");
         viewPager.setAdapter(adapter);
     }
 
