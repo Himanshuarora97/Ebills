@@ -32,7 +32,7 @@
             android:value="com.example" />
 
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".ShopPageActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,9 +46,9 @@
         <activity
             android:name=".SearchingActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ShopPageActivity"
-            android:screenOrientation="portrait" />
+        <!--<activity-->
+            <!--android:name=".ShopPageActivity"-->
+            <!--android:screenOrientation="portrait" />-->
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait" />

@@ -35,7 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:text="Samsung LED TV"
+                    android:text="Toaster"
                     android:textColor="@color/md_black_1000"
                     android:textSize="20sp"
                     android:textStyle="bold" />

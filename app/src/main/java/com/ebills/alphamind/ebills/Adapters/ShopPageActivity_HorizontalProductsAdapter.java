@@ -43,7 +43,7 @@ public class ShopPageActivity_HorizontalProductsAdapter extends RecyclerView.Ada
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 1;
     }
 }
 
