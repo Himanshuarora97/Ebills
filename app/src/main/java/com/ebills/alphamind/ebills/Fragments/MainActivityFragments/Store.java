@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ebills.alphamind.ebills.Adapters.MainActivityShopNameFrontAdapter;
+import com.ebills.alphamind.ebills.Adapters.ProductsAdapter;
 import com.ebills.alphamind.ebills.Adapters.ShopPageActivity_HorizontalProductsAdapter;
 import com.ebills.alphamind.ebills.R;
 import com.ebills.alphamind.ebills.Storage.AllBills.AllBillsStorage;
@@ -39,7 +40,7 @@ public class Store extends Fragment {
 
 
     @SuppressLint("ValidFragment")
-    public Store(Context ctx , String query) {
+    public Store(Context ctx, String query) {
         this.ctx = ctx;
         this.query = query;
     }
@@ -62,22 +63,24 @@ public class Store extends Fragment {
 
             JSONArray jsonArray1 = new JSONArray();
 
-        for (int i = 0 ; i<jsonArray.length() ;i++){
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-            if (jsonObject.getJSONObject("seller").getString("name").equals(query)){
-                jsonArray1.put(jsonObject);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                if (jsonObject.getJSONObject("seller").getString("name").equals(query)) {
+                    jsonArray1.put(jsonObject);
+                }
+                if (String.valueOf(Float.parseFloat(jsonObject.getJSONObject("invoice").getString("amount")) * (-1)).equals(query)) {
+                    jsonArray1.put(jsonObject);
+                }
+                if (jsonObject.getJSONObject("invoice").getString("date").contains(query)) {
+                    jsonArray1.put(jsonObject);
+                }
             }
-            if (String.valueOf(Integer.parseInt(jsonObject.getJSONObject("invoice").getString("amount")) * (-1)).equals(query)){
-                jsonArray1.put(jsonObject);
-            }
-            if (jsonObject.getJSONObject("invoice").getString("date").contains(query)){
-                jsonArray1.put(jsonObject);
-            }
-        }
 
             rv = v.findViewById(R.id.RecyclerView_Stores);
+            adapter = new ProductsAdapter(ctx, jsonArray1);
             layoutManager = new LinearLayoutManager(ctx);
-            adapter = new MainActivityShopNameFrontAdapter(ctx , jsonArray1);
+            rv.setAdapter(adapter);
+            rv.setLayoutManager(layoutManager);
 
         } catch (JSONException e) {
             e.printStackTrace();

@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.ebills.alphamind.ebills.Fragments.MainActivityFragments.Products;
 import com.ebills.alphamind.ebills.Fragments.MainActivityFragments.Store;
@@ -42,6 +43,7 @@ public class SearchingActivity extends AppCompatActivity {
     }
 
     private void setupViewPager(ViewPager viewPager) {
+        Log.e("setupViewPager: ",query);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new Store(SearchingActivity.this , query), "Stores");
         adapter.addFragment(new Products(SearchingActivity.this , query), "Products");

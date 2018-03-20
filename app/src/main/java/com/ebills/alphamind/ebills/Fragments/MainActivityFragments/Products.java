@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,7 @@ public class Products extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+        Log.e("onCreateView: ",query);
         View v = inflater.inflate(R.layout.stores_fragment_main, container, false);
 
         try {
@@ -64,19 +66,21 @@ public class Products extends Fragment {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 JSONArray jsonArray2 = jsonObject.getJSONObject("invoice").getJSONArray("products");
                 for (int i1 = 0; i1 < jsonArray2.length(); i1++) {
-                    if (jsonArray2.getJSONObject(i).getString("STOCKITEMNAME").equalsIgnoreCase(query)) {
+                    if (jsonArray2.getJSONObject(i1).getString("STOCKITEMNAME").equalsIgnoreCase(query)) {
                         JSONObject jsonObject1 = new JSONObject();
-                        jsonObject1.put("STOCKITEMNAME" , jsonArray2.getJSONObject(i).getString("STOCKITEMNAME"));
-                        jsonObject1.put("BILLEDQTY",jsonArray2.getJSONObject(i).getString("BILLEDQTY"));
-                        jsonObject1.put("AMOUNT",jsonArray2.getJSONObject(i).getString("AMOUNT"));
+                        jsonObject1.put("STOCKITEMNAME" , jsonArray2.getJSONObject(i1).getString("STOCKITEMNAME"));
+                        jsonObject1.put("BILLEDQTY",jsonArray2.getJSONObject(i1).getString("BILLEDQTY"));
+                        jsonObject1.put("AMOUNT",jsonArray2.getJSONObject(i1).getString("AMOUNT"));
                         jsonArray1.put(jsonObject);
                     }
                 }
             }
+            Log.e("onCreateView: ",jsonArray1.toString() );
             rv = v.findViewById(R.id.RecyclerView_Stores);
-            layoutManager = new LinearLayoutManager(ctx);
             adapter = new ProductsAdapter(ctx, jsonArray1);
-
+            layoutManager = new LinearLayoutManager(ctx);
+            rv.setAdapter(adapter);
+            rv.setLayoutManager(layoutManager);
         } catch (JSONException e) {
             e.printStackTrace();
         }
